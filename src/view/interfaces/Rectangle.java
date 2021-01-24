@@ -1,6 +1,6 @@
 package view.interfaces;
 
-/*public class Rectangle implements myShape{
+public class Rectangle implements myShape{
 
     int endHeight, endWidth;
 
@@ -9,15 +9,11 @@ package view.interfaces;
         this.endWidth = endWidth;
     }
 
-    public void draw(){
-
+    public int getPointHeight(){
+        return endHeight;
     }
 
-    public int getEndHeight(){
-
+    public int getPointWidth(){
+        return endWidth;
     }
-
-    public int getEndWidth(){
-
-    }
-}*/
+}
