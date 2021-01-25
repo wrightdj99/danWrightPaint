@@ -2,16 +2,41 @@ package view.interfaces;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public abstract class PaintCanvasBase extends JComponent {
     public abstract Graphics2D getGraphics2D();
     public PaintCanvasBase(){
-        this.StartPoint = new paintPoint();
-        this.EndPoint = new paintPoint();
-        this.MyClickHandler = new ClickHandler(this);
+        //this.StartPoint = new paintPoint();
+        //this.EndPoint = new paintPoint();
+        this.myUndoRedo = new undoRedo(this);
+        this.MyClickHandler = new ClickHandler(this, this.myUndoRedo);
         this.addMouseListener(this.MyClickHandler);
+        //this.myUR = new undoRedo(this);
     }
+    public void drawAllRectangles(){
+        Graphics2D graphics2D = this.getGraphics2D();
+        graphics2D.setColor(Color.WHITE);
+        graphics2D.fillRect(0, 0, this.getWidth(), this.getHeight());
+        for(int i =0; i < this.myUndoRedo.registeredRect.size(); i++){
+            Rectangle rectangle = this.myUndoRedo.registeredRect.get(i);
+            rectangle.draw(graphics2D);
+        }
+
+    }
+
+    public void redrawRectangle(){
+        Graphics2D graphics2D = this.getGraphics2D();
+        graphics2D.setColor(Color.PINK);
+        graphics2D.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+
+    }
+
+    //ArrayList<Rectangle> registeredRect = new ArrayList<Rectangle>();
+
+    /*
     public void drawDummyRectangle(){
         Graphics2D graphics2d = this.getGraphics2D();
         graphics2d.setColor(Color.green);
@@ -19,6 +44,8 @@ public abstract class PaintCanvasBase extends JComponent {
         int height = this.getPointHeight();
         graphics2d.fillRect(this.StartPoint.x, this.StartPoint.y, width, height);
     }
+
+    //myShape myRect = new Rectangle(24, 90);
     private int getPointWidth(){
         int endWidth = this.EndPoint.x - this.StartPoint.x;
         if (endWidth < 0){
@@ -36,10 +63,11 @@ public abstract class PaintCanvasBase extends JComponent {
         }
         return endHeight;
     }
-
-
+    */
     private ClickHandler MyClickHandler;
-    public paintPoint StartPoint;
-    public paintPoint EndPoint;
+    public undoRedo myUndoRedo;
+    //public undoRedo myUR;
+    //public paintPoint StartPoint;
+    //public paintPoint EndPoint;
 
 }
