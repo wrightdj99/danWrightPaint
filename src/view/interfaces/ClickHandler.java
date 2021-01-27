@@ -20,7 +20,8 @@ public class ClickHandler extends MouseAdapter {
         paintPoint startPoint = new paintPoint();
         startPoint.x = e.getX();
         startPoint.y = e.getY();
-        this.myRectangle = new Rectangle(startPoint);
+        //this.myRectangle = new Rectangle(startPoint);
+        this.myRectangle = RectangleFactory.createRectangle(startPoint);
     }
 
     @Override
@@ -29,6 +30,9 @@ public class ClickHandler extends MouseAdapter {
         endPoint.x = e.getX();
         endPoint.y = e.getY();
         this.myRectangle.endPoint = endPoint;
+        this.myRectangle.setMyHeight();
+        this.myRectangle.setMyWidth();
+        this.myRectangle.setMyColor(Color.green);
         this.myRectangle.draw(this.paintCanvasBase.getGraphics2D());
         myUr.registeredRect.add(this.myRectangle);
         System.out.println("ArrayList size " + myUr.registeredRect.size());
