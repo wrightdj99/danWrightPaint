@@ -32,6 +32,7 @@ public class ClickHandler extends MouseAdapter {
         this.myRectangle.draw(this.paintCanvasBase.getGraphics2D());
         myUr.registeredRect.add(this.myRectangle);
         System.out.println("ArrayList size " + myUr.registeredRect.size());
+        paintCanvasBase.clearItAll();
         //myUr.registeredRect.add(myRect);
         //this.myUr.registeredRect.add(myRect);
         //myUr.registeredRect.add(myRect);

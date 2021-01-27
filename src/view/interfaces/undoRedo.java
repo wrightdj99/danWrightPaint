@@ -23,7 +23,8 @@ public class undoRedo {
         else{
             //System.out.println("Before " + this.registeredRect.size());
             Rectangle removedRectangle = this.registeredRect.remove(this.registeredRect.size() - 1);
-            System.out.println("Done");
+            this.unregisteredRect.add(removedRectangle);
+            System.out.println("Done" + this.unregisteredRect.size());
             //System.out.println("After " + this.registeredRect.size());
         }
 
@@ -55,14 +56,24 @@ public class undoRedo {
         //Rectangle reintroduedRectangle = this.unregisteredRect.remove(this.unregisteredRect.size() - 1);
         //this.registeredRect.add(reintroduedRectangle);
 
-        paintCanvasBase.redrawRectangle();
+        if(this.unregisteredRect.size() == 0){
+            System.out.println("Unregistered Shapes is empty");
+        }
+        else{
+            Rectangle reinsertedRectangle = this.unregisteredRect.remove(this.unregisteredRect.size() - 1);
+            this.registeredRect.add(reinsertedRectangle);
+            System.out.println("Exiled rectangles " + this.unregisteredRect.size());
+            System.out.println("Redeemed rectangles " + this.registeredRect.size());
+        }
+
+        paintCanvasBase.drawAllRectangles();
     }
 
-    public void addShape(){
+    /*public void addShape(){
 
     }
 
     public void deleteShape(){
 
-    }
+    }*/
 }

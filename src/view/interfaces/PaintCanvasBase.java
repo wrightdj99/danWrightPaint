@@ -26,13 +26,24 @@ public abstract class PaintCanvasBase extends JComponent {
 
     }
 
-    public void redrawRectangle(){
+    public void clearItAll(){
+        this.myUndoRedo.unregisteredRect.clear();
+    }
+
+    /*public void redrawRectangle(){
         Graphics2D graphics2D = this.getGraphics2D();
-        graphics2D.setColor(Color.PINK);
+        graphics2D.setColor(Color.WHITE);
         graphics2D.fillRect(0, 0, this.getWidth(), this.getHeight());
 
+        for(int i = 0; i < this.myUndoRedo.unregisteredRect.size(); i++){
+            Rectangle redoRectangle = this.myUndoRedo.unregisteredRect.get(i);
+            if(i == this.myUndoRedo.unregisteredRect.size() - 1){
+                redoRectangle.draw(graphics2D);
+            }
+        }
 
-    }
+
+    }*/
 
     //ArrayList<Rectangle> registeredRect = new ArrayList<Rectangle>();
 
