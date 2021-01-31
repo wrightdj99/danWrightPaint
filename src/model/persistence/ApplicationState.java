@@ -32,7 +32,9 @@ public class ApplicationState implements IApplicationState {
 
     @Override
     public void setActivePrimaryColor() {
+        System.out.println("setActivePrimaryColor called.");
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
+        System.out.println("activePrimaryColor is:" + activePrimaryColor.name());
     }
 
     @Override
@@ -51,9 +53,7 @@ public class ApplicationState implements IApplicationState {
     }
 
     @Override
-    public ShapeType getActiveShapeType() {
-        return activeShapeType;
-    }
+    public ShapeType getActiveShapeType() { return activeShapeType; }
 
     @Override
     public ShapeColor getActivePrimaryColor() {

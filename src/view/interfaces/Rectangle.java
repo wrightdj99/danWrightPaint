@@ -1,13 +1,22 @@
 package view.interfaces;
 
+import model.ShapeColor;
+import model.ShapeColorMap;
+import model.persistence.ApplicationState;
+
 import java.awt.*;
 
 public class Rectangle implements myShape{
 
     public paintPoint startPoint, endPoint;
     int width, height;
-    Color myColor;
-    Rectangle(paintPoint _startPoint){
+    public ApplicationState myAppState;
+    public ShapeColorMap myShapeColorMap;
+    ShapeColor myColor;
+    Rectangle(ApplicationState _appState, paintPoint _startPoint){
+        this.myAppState = _appState;
+        this.myColor = myAppState.getActivePrimaryColor();
+        this.myShapeColorMap = new ShapeColorMap();
         this.startPoint = _startPoint;
     }
 
@@ -19,7 +28,7 @@ public class Rectangle implements myShape{
         //this.width = this.getMyWidth();
         //this.height = this.getMyHeight();
         System.out.println("We drew a shape");
-        graphics2d.setColor(this.myColor);
+        graphics2d.setColor(myShapeColorMap.getMyShapeColor(this.myColor));
         graphics2d.fillRect(this.startPoint.x, this.startPoint.y, this.width, this.height);
     }
 
@@ -40,9 +49,12 @@ public class Rectangle implements myShape{
         }
         this.height = endHeight;
     }
+    /*
     public void setMyColor(Color aColor){
-        this.myColor = aColor;
+        this.myColor = myAppState.getActivePrimaryColor();
     }
+     */
+
 
     //methods for get start and end points here
 }

@@ -43,6 +43,7 @@ public class Main {
         graphics2d.setColor(Color.BLUE);
         graphics2d.drawRect(12, 13, 200, 400);
 
+
         // Selected Shape
         Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
         graphics2d.setStroke(stroke);

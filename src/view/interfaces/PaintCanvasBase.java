@@ -1,5 +1,7 @@
 package view.interfaces;
 
+import model.persistence.ApplicationState;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,9 +9,11 @@ import java.util.ArrayList;
 
 public abstract class PaintCanvasBase extends JComponent {
     public abstract Graphics2D getGraphics2D();
+    //public ApplicationState myAppState;
     public PaintCanvasBase(){
         //this.StartPoint = new paintPoint();
         //this.EndPoint = new paintPoint();
+        //this.myAppState = _appState;
         this.myUndoRedo = new undoRedo(this);
         this.MyClickHandler = new ClickHandler(this, this.myUndoRedo);
         this.addMouseListener(this.MyClickHandler);
@@ -24,6 +28,10 @@ public abstract class PaintCanvasBase extends JComponent {
             rectangle.draw(graphics2D);
         }
 
+    }
+
+    public void setMyAppState(ApplicationState aState){
+        this.myAppState = aState;
     }
 
     public void clearItAll(){
@@ -75,8 +83,12 @@ public abstract class PaintCanvasBase extends JComponent {
         return endHeight;
     }
     */
+    public ClickHandler GetMyClickHandler(){
+        return this.MyClickHandler;
+    }
     private ClickHandler MyClickHandler;
     public undoRedo myUndoRedo;
+    public ApplicationState myAppState;
     //public undoRedo myUR;
     //public paintPoint StartPoint;
     //public paintPoint EndPoint;

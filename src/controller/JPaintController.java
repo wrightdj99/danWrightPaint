@@ -1,6 +1,7 @@
 package controller;
 
 import model.interfaces.IApplicationState;
+import model.persistence.ApplicationState;
 import view.EventName;
 import view.interfaces.IEventCallback;
 import view.interfaces.IUiModule;
@@ -18,6 +19,8 @@ public class JPaintController implements IJPaintController {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.paintCanvas = paintCanvas;
+        this.paintCanvas.setMyAppState((ApplicationState) this.applicationState);
+        this.paintCanvas.GetMyClickHandler().setMyAppState(this.paintCanvas.myAppState);
     }
 
     @Override
@@ -27,7 +30,9 @@ public class JPaintController implements IJPaintController {
 
     private void setupEvents() {
         uiModule.addEvent(EventName.CHOOSE_SHAPE, () -> applicationState.setActiveShape());
+        //Sprint 2 Starting Task
         uiModule.addEvent(EventName.CHOOSE_PRIMARY_COLOR, () -> applicationState.setActivePrimaryColor());
+        //uiModule.addEvent(EventName.CHOOSE_PRIMARY_COLOR, () -> System.out.println("Hello World"));
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
         uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
         uiModule.addEvent(EventName.CHOOSE_MOUSE_MODE, () -> applicationState.setActiveStartAndEndPointMode());

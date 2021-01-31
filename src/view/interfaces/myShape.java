@@ -1,5 +1,7 @@
 package view.interfaces;
 
+import model.ShapeColor;
+
 import java.awt.*;
 
 public interface myShape {
@@ -7,7 +9,8 @@ public interface myShape {
     //int getEndPoint();
     void setMyWidth();
     void setMyHeight();
-    void setMyColor(Color aColor);
+    //void setMyColor(ShapeColor aColor);
     void draw(Graphics2D graphics2d);
+    //void setMyColor();
     //int
 }

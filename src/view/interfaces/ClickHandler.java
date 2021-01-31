@@ -1,4 +1,6 @@
 package view.interfaces;
+import model.persistence.ApplicationState;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,19 +11,23 @@ public class ClickHandler extends MouseAdapter {
         this.myUr = _myUr;
     }
     private PaintCanvasBase paintCanvasBase;
+    private ApplicationState myAppState;
     public undoRedo myUr;
     private Rectangle myRectangle;
     //private paintPoint StartPoint;
     //private paintPoint EndPoint;
     //private int ourWidth = StartPoint.x - EndPoint.x;
     //private int ourHeight = StartPoint.y - EndPoint.y;
+    public void setMyAppState(ApplicationState aState){
+        this.myAppState = aState;
+    }
     @Override
     public void mousePressed(MouseEvent e){
         paintPoint startPoint = new paintPoint();
         startPoint.x = e.getX();
         startPoint.y = e.getY();
         //this.myRectangle = new Rectangle(startPoint);
-        this.myRectangle = RectangleFactory.createRectangle(startPoint);
+        this.myRectangle = RectangleFactory.createRectangle(this.myAppState, startPoint);
     }
 
     @Override
@@ -32,7 +38,7 @@ public class ClickHandler extends MouseAdapter {
         this.myRectangle.endPoint = endPoint;
         this.myRectangle.setMyHeight();
         this.myRectangle.setMyWidth();
-        this.myRectangle.setMyColor(Color.green);
+        //this.myRectangle.setMyColor(Color.blue);
         this.myRectangle.draw(this.paintCanvasBase.getGraphics2D());
         myUr.registeredRect.add(this.myRectangle);
         System.out.println("ArrayList size " + myUr.registeredRect.size());
