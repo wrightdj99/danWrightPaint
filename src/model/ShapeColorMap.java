@@ -17,14 +17,15 @@ public class ShapeColorMap {
         this.MyMap.put(ShapeColor.BLACK, Color.BLACK);
         this.MyMap.put(ShapeColor.LIGHT_GRAY, Color.LIGHT_GRAY);
         this.MyMap.put(ShapeColor.MAGENTA, Color.MAGENTA);
-        this.MyMap.put(ShapeColor.ORANGE, Color.PINK);
+        this.MyMap.put(ShapeColor.ORANGE, Color.ORANGE);
         this.MyMap.put(ShapeColor.RED, Color.RED);
         this.MyMap.put(ShapeColor.WHITE, Color.WHITE);
         this.MyMap.put(ShapeColor.YELLOW, Color.YELLOW);
     }
 
-    public Color getMyShapeColor(ShapeColor shapeColor){
+    public Color getMyPrimaryShapeColor(ShapeColor shapeColor){
         return this.MyMap.get(shapeColor);
     }
+    public Color getMySecondaryShapeColor(ShapeColor shapeColor) { return this.MyMap.get(shapeColor); }
 
 }

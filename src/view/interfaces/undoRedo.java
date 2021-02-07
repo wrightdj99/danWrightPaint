@@ -1,30 +1,43 @@
 package view.interfaces;
 
-import java.awt.*;
+import model.ShapeType;
+import model.ShapeTypeMap;
+import model.persistence.ApplicationState;
+
 import java.util.ArrayList;
 
 public class undoRedo {
+
     public undoRedo(PaintCanvasBase _pCV){
-
         this.paintCanvasBase = _pCV;
-        this.registeredRect =  new ArrayList<Rectangle>();
-        this.unregisteredRect  = new ArrayList<Rectangle>();
+        this.registeredShapes =  new ArrayList<OneShape>();
+        this.unregisteredShapes = new ArrayList<OneShape>();
+        //this.registeredEllipse = new ArrayList<Ellipse>();
+        //this.unregisteredEllipse = new ArrayList<Ellipse>();
+        //this.myShape = myAppState.getActiveShapeType();
+        //this.myShapeMap = new ShapeTypeMap();
+        //this.myAppState = _appState;
     }
-
-    public ArrayList<Rectangle> registeredRect;
-    public ArrayList<Rectangle> unregisteredRect;
+    //Need these for triangles and ellipses
+    public ArrayList<OneShape> registeredShapes;
+    public ArrayList<OneShape> unregisteredShapes;
+    public ArrayList<Ellipse> registeredEllipse;
+    public ArrayList<Ellipse> unregisteredEllipse;
+    public ShapeType myShape;
+    public ShapeTypeMap myShapeMap;
+    public ApplicationState myAppState;
 
     PaintCanvasBase paintCanvasBase;
 
     public void myUndo(){
-        if(this.registeredRect.size() == 0){
+        if(this.registeredShapes.size() == 0){
             System.out.println("Registered Shapes is empty");
         }
         else{
             //System.out.println("Before " + this.registeredRect.size());
-            Rectangle removedRectangle = this.registeredRect.remove(this.registeredRect.size() - 1);
-            this.unregisteredRect.add(removedRectangle);
-            System.out.println("Done" + this.unregisteredRect.size());
+            OneShape removedShape = this.registeredShapes.remove(this.registeredShapes.size() - 1);
+            this.unregisteredShapes.add(removedShape);
+            System.out.println("Done" + this.unregisteredShapes.size());
             //System.out.println("After " + this.registeredRect.size());
         }
 
@@ -56,14 +69,14 @@ public class undoRedo {
         //Rectangle reintroduedRectangle = this.unregisteredRect.remove(this.unregisteredRect.size() - 1);
         //this.registeredRect.add(reintroduedRectangle);
 
-        if(this.unregisteredRect.size() == 0){
+        if(this.unregisteredShapes.size() == 0){
             System.out.println("Unregistered Shapes is empty");
         }
         else{
-            Rectangle reinsertedRectangle = this.unregisteredRect.remove(this.unregisteredRect.size() - 1);
-            this.registeredRect.add(reinsertedRectangle);
-            System.out.println("Exiled rectangles " + this.unregisteredRect.size());
-            System.out.println("Redeemed rectangles " + this.registeredRect.size());
+            OneShape reinsertedShape = this.unregisteredShapes.remove(this.unregisteredShapes.size() - 1);
+            this.registeredShapes.add(reinsertedShape);
+            System.out.println("Exiled rectangles " + this.unregisteredShapes.size());
+            System.out.println("Redeemed rectangles " + this.registeredShapes.size());
         }
 
         paintCanvasBase.drawAllRectangles();

@@ -2,20 +2,26 @@ package view.interfaces;
 
 import model.ShapeColor;
 import model.ShapeColorMap;
+import model.ShapeShadingMap;
+import model.ShapeShadingType;
 import model.persistence.ApplicationState;
 
 import java.awt.*;
 
-public class Rectangle implements myShape{
+public class Rectangle extends OneShape implements myShape{
 
-    public paintPoint startPoint, endPoint;
-    int width, height;
     public ApplicationState myAppState;
     public ShapeColorMap myShapeColorMap;
+    public ShapeShadingMap myShade;
     ShapeColor myColor;
+    ShapeColor mySecondaryColor;
+    ShapeShadingType myActiveShade;
     Rectangle(ApplicationState _appState, paintPoint _startPoint){
         this.myAppState = _appState;
         this.myColor = myAppState.getActivePrimaryColor();
+        this.mySecondaryColor = myAppState.getActiveSecondaryColor();
+        this.myShade = new ShapeShadingMap();
+        this.myActiveShade = myAppState.getActiveShapeShadingType();
         this.myShapeColorMap = new ShapeColorMap();
         this.startPoint = _startPoint;
     }
@@ -23,12 +29,27 @@ public class Rectangle implements myShape{
     /*public Rectangle() {
 
     }*/
-
+    //@Override
     public void draw(Graphics2D graphics2d){
         //this.width = this.getMyWidth();
         //this.height = this.getMyHeight();
-        System.out.println("We drew a shape");
-        graphics2d.setColor(myShapeColorMap.getMyShapeColor(this.myColor));
+        System.out.println("We drew a Rectangle");
+        if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
+            //SUPPOSED TO SET THIS TO SECONDARY COLOR
+            graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            graphics2d.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
+            graphics2d.setColor(Color.white);
+        }
+
+        else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
+            graphics2d.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
+            graphics2d.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
+            graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+        }
+
+        else{
+            graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+        }
         graphics2d.fillRect(this.startPoint.x, this.startPoint.y, this.width, this.height);
     }
 

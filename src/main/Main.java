@@ -23,6 +23,11 @@ public class Main {
         IJPaintController controller = new JPaintController(uiModule, appState, paintCanvas);
 
         controller.setup();
+
+        //Graphics2D graphics2D = paintCanvas.getGraphics2D();
+        //graphics2D.fillOval(100, 100, 100, 100);
+        //Graphics2D graphics2D = paintCanvas.getGraphics2D();
+        //graphics2D.drawString("Dan's Paint Application", 30,30);
         //paintCanvas.drawDummyRectangle();
 
         // For example purposes only; remove all lines below from your final project.

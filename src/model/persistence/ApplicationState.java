@@ -27,7 +27,9 @@ public class ApplicationState implements IApplicationState {
 
     @Override
     public void setActiveShape() {
+        System.out.println("setActiveShape is called.");
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
+        System.out.println("activeShape is: " + activeShapeType.name());
     }
 
     @Override
@@ -39,12 +41,16 @@ public class ApplicationState implements IApplicationState {
 
     @Override
     public void setActiveSecondaryColor() {
+        System.out.println("setActiveSecondaryColor is called.");
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
+        System.out.println("activeSecondaryColor is:" + activeSecondaryColor.name());
     }
 
     @Override
     public void setActiveShadingType() {
+        System.out.println("Shading Type Called");
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
+        System.out.println("Shading type is: " + activeShapeShadingType.name());
     }
 
     @Override

@@ -4,7 +4,6 @@ import model.persistence.ApplicationState;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 
 public abstract class PaintCanvasBase extends JComponent {
@@ -23,9 +22,9 @@ public abstract class PaintCanvasBase extends JComponent {
         Graphics2D graphics2D = this.getGraphics2D();
         graphics2D.setColor(Color.WHITE);
         graphics2D.fillRect(0, 0, this.getWidth(), this.getHeight());
-        for(int i =0; i < this.myUndoRedo.registeredRect.size(); i++){
-            Rectangle rectangle = this.myUndoRedo.registeredRect.get(i);
-            rectangle.draw(graphics2D);
+        for(int i = 0; i < this.myUndoRedo.registeredShapes.size(); i++){
+            OneShape shape = this.myUndoRedo.registeredShapes.get(i);
+            shape.draw(graphics2D);
         }
 
     }
@@ -35,7 +34,7 @@ public abstract class PaintCanvasBase extends JComponent {
     }
 
     public void clearItAll(){
-        this.myUndoRedo.unregisteredRect.clear();
+        this.myUndoRedo.unregisteredShapes.clear();
     }
 
     /*public void redrawRectangle(){
