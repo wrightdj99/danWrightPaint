@@ -23,6 +23,7 @@ public class Ellipse extends OneShape implements myShape{
         this.myShade = new ShapeShadingMap();
         this.myActiveShade = myAppState.getActiveShapeShadingType();
         this.myShapeColorMap = new ShapeColorMap();
+        this.isSelected = false;
     }
 
     public void draw(Graphics2D graphics2D){
@@ -40,7 +41,12 @@ public class Ellipse extends OneShape implements myShape{
         }
 
         else{
-            graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            if(this.isSelected == true){
+                graphics2D.setColor(Color.PINK);
+            }
+            else{
+                graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            }
         }
 
         graphics2D.fillOval(this.startPoint.x - 5, this.startPoint.y - 5, this.width, this.height);

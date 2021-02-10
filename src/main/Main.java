@@ -24,8 +24,14 @@ public class Main {
 
         controller.setup();
 
-        //Graphics2D graphics2D = paintCanvas.getGraphics2D();
-        //graphics2D.fillOval(100, 100, 100, 100);
+        /*Graphics2D graphics2D = paintCanvas.getGraphics2D();
+        graphics2D.setColor(Color.blue);
+        int[] xPoints = {40, 90, 40};
+        int[] yPoints = {60, 50, 90};
+        graphics2D.fillPolygon(xPoints, yPoints, 3);*/
+
+        //graphics2D.fillPolygon(int[] xPoints = {40, 50, 30}, int[] yPoints = {60, 70, 20}, 3);
+        //graphics2D.drawPolygon(new int[] {10, 20, 20}, new int[] {50, 60, 70}, 3);
         //Graphics2D graphics2D = paintCanvas.getGraphics2D();
         //graphics2D.drawString("Dan's Paint Application", 30,30);
         //paintCanvas.drawDummyRectangle();

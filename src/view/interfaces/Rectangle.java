@@ -24,6 +24,7 @@ public class Rectangle extends OneShape implements myShape{
         this.myActiveShade = myAppState.getActiveShapeShadingType();
         this.myShapeColorMap = new ShapeColorMap();
         this.startPoint = _startPoint;
+        this.isSelected = false;
     }
 
     /*public Rectangle() {
@@ -36,19 +37,38 @@ public class Rectangle extends OneShape implements myShape{
         System.out.println("We drew a Rectangle");
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
             //SUPPOSED TO SET THIS TO SECONDARY COLOR
-            graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
-            graphics2d.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
-            graphics2d.setColor(Color.white);
+            if(this.isSelected == true){
+                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+                graphics2d.setStroke(stroke);
+                graphics2d.setColor(Color.BLACK);
+                graphics2d.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+                graphics2d.setColor(Color.blue);
+            }
+            else{
+                graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+                graphics2d.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
+                graphics2d.setColor(Color.WHITE);
+            }
         }
 
         else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
-            graphics2d.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
-            graphics2d.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
-            graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            if(this.isSelected == true){
+                graphics2d.setColor(Color.PINK);
+            }
+            else{
+                graphics2d.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
+                graphics2d.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
+                graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            }
         }
 
         else{
-            graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            if(this.isSelected == true){
+                graphics2d.setColor(Color.PINK);
+            }
+            else{
+                graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
+            }
         }
         graphics2d.fillRect(this.startPoint.x, this.startPoint.y, this.width, this.height);
     }
@@ -70,6 +90,8 @@ public class Rectangle extends OneShape implements myShape{
         }
         this.height = endHeight;
     }
+
+
     /*
     public void setMyColor(Color aColor){
         this.myColor = myAppState.getActivePrimaryColor();

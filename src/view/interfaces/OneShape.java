@@ -4,6 +4,7 @@ import java.awt.*;
 
 public abstract class OneShape {
     public paintPoint startPoint, endPoint;
+    public boolean isSelected;
     protected int width, height;
     public abstract void draw(Graphics2D graphics2d);
     public abstract void setMyWidth();

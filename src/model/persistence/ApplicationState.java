@@ -55,7 +55,9 @@ public class ApplicationState implements IApplicationState {
 
     @Override
     public void setActiveStartAndEndPointMode() {
+        System.out.println("Mouse Mode is called");
         activeMouseMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
+        System.out.println("Mouse mode selected is: " + activeMouseMode.name());
     }
 
     @Override
