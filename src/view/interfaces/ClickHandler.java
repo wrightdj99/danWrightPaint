@@ -58,8 +58,10 @@ public class ClickHandler extends MouseAdapter {
         endPoint.y = e.getY();
         if (this.myAppState.getActiveMouseMode().name().equals("DRAW")) {
             this.myShape.endPoint = endPoint;
-            this.myShape.setMyHeight();
-            this.myShape.setMyWidth();
+            this.setShapeWidth((view.interfaces.myShape) this.myShape);
+            this.setShapeHeight((view.interfaces.myShape) this.myShape);
+            //this.myShape.setMyHeight();
+            //this.myShape.setMyWidth();
             //System.out.println(endPoint.x);
             //this.myRectangle.setMyColor(Color.blue);
             this.myShape.draw(this.paintCanvasBase.getGraphics2D());
@@ -114,7 +116,12 @@ public class ClickHandler extends MouseAdapter {
         paintCanvasBase.drawAllShapes();
 
     }
-
+    private void setShapeWidth(myShape theShape){
+        theShape.setMyWidth();
+    }
+    private void setShapeHeight(myShape theShape){
+        theShape.setMyHeight();
+    }
 
 }
 

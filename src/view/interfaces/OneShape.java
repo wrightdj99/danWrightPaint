@@ -7,6 +7,6 @@ public abstract class OneShape {
     public boolean isSelected;
     protected int width, height;
     public abstract void draw(Graphics2D graphics2d);
-    public abstract void setMyWidth();
-    public abstract void setMyHeight();
+    //public abstract void setMyWidth();
+    //public abstract void setMyHeight();
 }
