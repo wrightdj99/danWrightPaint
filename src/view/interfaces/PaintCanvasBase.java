@@ -18,12 +18,15 @@ public abstract class PaintCanvasBase extends JComponent {
         this.addMouseListener(this.MyClickHandler);
         //this.myUR = new undoRedo(this);
     }
-    public void drawAllRectangles(){
+    public void drawAllShapes(){
         Graphics2D graphics2D = this.getGraphics2D();
         graphics2D.setColor(Color.WHITE);
         graphics2D.fillRect(0, 0, this.getWidth(), this.getHeight());
         for(int i = 0; i < this.myUndoRedo.registeredShapes.size(); i++){
             OneShape shape = this.myUndoRedo.registeredShapes.get(i);
+            if (this.myAppState.getActiveMouseMode().name().equals("DRAW")){
+                shape.isSelected = false;
+            }
             shape.draw(graphics2D);
         }
 
@@ -31,6 +34,7 @@ public abstract class PaintCanvasBase extends JComponent {
 
     public void setMyAppState(ApplicationState aState){
         this.myAppState = aState;
+        this.myUndoRedo.setMyAppState(aState);
     }
 
     public void clearItAll(){

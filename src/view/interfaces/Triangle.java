@@ -34,17 +34,24 @@ public class Triangle extends OneShape implements myShape{
         System.out.println("We drew a Triangle!");
         this.setMyHeight();
         this.setMyWidth();
+        int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
+        int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
             if(this.isSelected == true){
-                graphics2D.setColor(Color.PINK);
+                graphics2D.setColor(Color.BLACK);
+                //graphics2D.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+                int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
+                int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
+                graphics2D.drawPolygon(xPoints, yPoints, 3);
+                graphics2D.setColor(Color.blue);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
             /*int[] xPoints = {this.startPoint.x - 5, this.endPoint.x - 5, this.startPoint.x - 5};
             int[] yPoints = {this.startPoint.y - 5, this.endPoint.y - 5, this.endPoint.y - 5};
             graphics2D.fillPolygon(xPoints, yPoints, 3);*/
-                int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
-                int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
+                //int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
+                //int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
                 int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
                 int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
                 graphics2D.fillPolygon(xPoints, yPoints, 3);
@@ -56,12 +63,17 @@ public class Triangle extends OneShape implements myShape{
 
         else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                graphics2D.setColor(Color.PINK);
+                graphics2D.setColor(Color.BLACK);
+                //graphics2D.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+                int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
+                int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
+                graphics2D.drawPolygon(xPoints, yPoints, 3);
+                graphics2D.setColor(Color.blue);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
-                int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
-                int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
+                funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
+                funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
                 int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
                 int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
                 graphics2D.fillPolygon(xPoints, yPoints, 3);
@@ -71,7 +83,12 @@ public class Triangle extends OneShape implements myShape{
 
         else{
             if(this.isSelected == true){
-                graphics2D.setColor(Color.PINK);
+                graphics2D.setColor(Color.BLACK);
+                //graphics2D.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+                int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
+                int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
+                graphics2D.drawPolygon(xPoints, yPoints, 3);
+                graphics2D.setColor(Color.blue);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));

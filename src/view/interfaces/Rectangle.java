@@ -53,7 +53,11 @@ public class Rectangle extends OneShape implements myShape{
 
         else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                graphics2d.setColor(Color.PINK);
+                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+                graphics2d.setStroke(stroke);
+                graphics2d.setColor(Color.BLACK);
+                graphics2d.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+                graphics2d.setColor(Color.blue);
             }
             else{
                 graphics2d.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
@@ -64,7 +68,11 @@ public class Rectangle extends OneShape implements myShape{
 
         else{
             if(this.isSelected == true){
-                graphics2d.setColor(Color.PINK);
+                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+                graphics2d.setStroke(stroke);
+                graphics2d.setColor(Color.BLACK);
+                graphics2d.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+                graphics2d.setColor(Color.blue);
             }
             else{
                 graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
