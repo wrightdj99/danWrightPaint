@@ -31,7 +31,7 @@ public class Triangle extends OneShape implements myShape{
     }
 
     public void draw(Graphics2D graphics2D){
-        System.out.println("We drew a Triangle!");
+        //System.out.println("We drew a Triangle!");
         this.setMyHeight();
         this.setMyWidth();
         int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
@@ -121,5 +121,15 @@ public class Triangle extends OneShape implements myShape{
             this.startPoint.y = this.startPoint.y - endHeight;
         }
         this.height = endHeight;
+    }
+
+    public OneShape CloneMe(){
+        //if(this.IsCopied == true){
+            paintPoint newStartPoint = new paintPoint();
+            newStartPoint.x = this.startPoint.x + 30;
+            newStartPoint.y = this.startPoint.y + 30;
+            OneShape newShape = TriangleFactory.createTriangle(myAppState, newStartPoint);
+            return newShape;
+        //}
     }
 }

@@ -16,6 +16,7 @@ public abstract class PaintCanvasBase extends JComponent {
         this.myUndoRedo = new undoRedo(this);
         this.MyClickHandler = new ClickHandler(this, this.myUndoRedo);
         this.addMouseListener(this.MyClickHandler);
+        this.MyCopyShape = new CopyShape(this, myAppState);
         //this.myUR = new undoRedo(this);
     }
     public void drawAllShapes(){
@@ -40,6 +41,8 @@ public abstract class PaintCanvasBase extends JComponent {
     public void clearItAll(){
         this.myUndoRedo.unregisteredShapes.clear();
     }
+
+
 
     /*public void redrawRectangle(){
         Graphics2D graphics2D = this.getGraphics2D();
@@ -92,6 +95,7 @@ public abstract class PaintCanvasBase extends JComponent {
     private ClickHandler MyClickHandler;
     public undoRedo myUndoRedo;
     public ApplicationState myAppState;
+    public CopyShape MyCopyShape;
     //public undoRedo myUR;
     //public paintPoint StartPoint;
     //public paintPoint EndPoint;

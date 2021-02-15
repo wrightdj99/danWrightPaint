@@ -18,16 +18,20 @@ public class undoRedo {
         //this.myAppState = _appState;
     }
     //Need these for triangles and ellipses
+    public ApplicationState myAppState;
+    private PaintCanvasBase paintCanvasBase;
     public ArrayList<OneShape> registeredShapes;
     public ArrayList<OneShape> unregisteredShapes;
     public ArrayList<MoveRectangle> registeredMoves;
     public ArrayList<MoveRectangle> unregisteredMoves;
+    //Sprint 3 Lists:
+    //------------------------------------------
+    //public ArrayList<CopyShape> RegisteredCopies;
+    //public ArrayList<CopyShape> PastedCopies;
+    //-------------------------------------------
     //public ArrayList<Ellipse> unregisteredEllipse;
     //public ShapeType myShape;
     //public ShapeTypeMap myShapeMap;
-    public ApplicationState myAppState;
-
-    PaintCanvasBase paintCanvasBase;
     public void setMyAppState(ApplicationState aState){
         this.myAppState = aState;
     }
@@ -96,6 +100,7 @@ public class undoRedo {
                 this.registeredShapes.add(reinsertedShape);
                 System.out.println("Exiled rectangles " + this.unregisteredShapes.size());
                 System.out.println("Redeemed rectangles " + this.registeredShapes.size());
+                reinsertedShape.draw(paintCanvasBase.getGraphics2D());
             }
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")) {
             if (this.unregisteredMoves.size() == 0) {

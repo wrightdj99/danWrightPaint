@@ -3,11 +3,7 @@ package controller;
 import model.interfaces.IApplicationState;
 import model.persistence.ApplicationState;
 import view.EventName;
-import view.interfaces.IEventCallback;
-import view.interfaces.IUiModule;
-import view.interfaces.Rectangle;
-import view.interfaces.undoRedo;
-import view.interfaces.PaintCanvasBase;
+import view.interfaces.*;
 
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
@@ -30,7 +26,6 @@ public class JPaintController implements IJPaintController {
 
     private void setupEvents() {
         uiModule.addEvent(EventName.CHOOSE_SHAPE, () -> applicationState.setActiveShape());
-        //Sprint 2 Starting Task
         uiModule.addEvent(EventName.CHOOSE_PRIMARY_COLOR, () -> applicationState.setActivePrimaryColor());
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
         uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
@@ -54,8 +49,26 @@ public class JPaintController implements IJPaintController {
             }
         };
 
+        IEventCallback callback2 = new IEventCallback() {
+            @Override
+            public void run() {
+                CopyShape copyShape = paintCanvas.MyCopyShape;
+                paintCanvas.MyCopyShape.MyShapeCopy();
+            }
+        };
+
+        IEventCallback callback3 = new IEventCallback() {
+            @Override
+            public void run() {
+                CopyShape copyShape = paintCanvas.MyCopyShape;
+                paintCanvas.MyCopyShape.MyShapePaste();
+            }
+        };
+
         uiModule.addEvent(EventName.UNDO, callback);
         uiModule.addEvent(EventName.REDO, callback1);
+        uiModule.addEvent(EventName.COPY, callback2);
+        uiModule.addEvent(EventName.PASTE, callback3);
         //uiModule.addEvent(EventName.UNDO, () -> );
 
         /*IEventCallback callback = new IEventCallback() {

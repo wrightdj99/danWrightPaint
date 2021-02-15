@@ -34,7 +34,7 @@ public class Rectangle extends OneShape implements myShape{
     public void draw(Graphics2D graphics2d){
         //this.width = this.getMyWidth();
         //this.height = this.getMyHeight();
-        System.out.println("We drew a Rectangle");
+        //System.out.println("We drew a Rectangle");
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
             //SUPPOSED TO SET THIS TO SECONDARY COLOR
             if(this.isSelected == true){
@@ -97,6 +97,20 @@ public class Rectangle extends OneShape implements myShape{
             this.startPoint.y = this.startPoint.y - endHeight;
         }
         this.height = endHeight;
+    }
+
+    public OneShape CloneMe(){
+        paintPoint newStartPoint = new paintPoint();
+        newStartPoint.x = this.startPoint.x + 30;
+        newStartPoint.y = this.startPoint.y + 30;
+        paintPoint newEndPoint = new paintPoint();
+        newEndPoint.x = this.endPoint.x + 30;
+        newEndPoint.y = this.endPoint.y + 30;
+        Rectangle newShape = RectangleFactory.createRectangle(myAppState, newStartPoint);
+        newShape.endPoint = newEndPoint;
+        newShape.setMyHeight();
+        newShape.setMyWidth();
+        return newShape;
     }
 
 

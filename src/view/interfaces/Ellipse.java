@@ -27,7 +27,7 @@ public class Ellipse extends OneShape implements myShape{
     }
 
     public void draw(Graphics2D graphics2D){
-        System.out.println("We drew an Ellipse!");
+        //System.out.println("We drew an Ellipse!");
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)){
             if(this.isSelected == true){
                 Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
@@ -92,6 +92,14 @@ public class Ellipse extends OneShape implements myShape{
         }
 
         this.height = endHeight;
+    }
+
+    public OneShape CloneMe(){
+        paintPoint newStartPoint = new paintPoint();
+        newStartPoint.x = this.startPoint.x + 30;
+        newStartPoint.y = this.startPoint.y + 30;
+        OneShape newShape = EllipseFactory.createEllipse(myAppState, newStartPoint);
+        return newShape;
     }
 
 

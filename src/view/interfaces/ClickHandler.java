@@ -45,8 +45,6 @@ public class ClickHandler extends MouseAdapter {
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")) {
             this.myMoveRectangle = MoveFactory.createMove(this.myAppState, startPoint);
             System.out.println("Mouse move pressed");
-        } else {
-            System.out.println("Not allowed");
         }
         //If statement for if it's an ellipse or a triangle
     }
@@ -66,7 +64,7 @@ public class ClickHandler extends MouseAdapter {
             //this.myRectangle.setMyColor(Color.blue);
             this.myShape.draw(this.paintCanvasBase.getGraphics2D());
             myUr.registeredShapes.add(this.myShape);
-            System.out.println("ArrayList size " + myUr.registeredShapes.size());
+            //System.out.println("ArrayList size " + myUr.registeredShapes.size());
             paintCanvasBase.clearItAll();
         } else if (this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
             //System.out.println("This will be here soon");
