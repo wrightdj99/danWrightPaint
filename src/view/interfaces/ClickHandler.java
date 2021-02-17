@@ -40,11 +40,17 @@ public class ClickHandler extends MouseAdapter {
             } else {
                 this.myShape = EllipseFactory.createEllipse(this.myAppState, startPoint);
             }
+            this.myUr.unregisteredShapes.clear();
+            System.out.println("My unregistered shapes: " + this.myUr.unregisteredShapes.size());
         } else if (this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
             this.mySelection = SelectionFactory.CreateSelection(this.myAppState, startPoint);
+            this.myUr.unregisteredShapes.clear();
+            System.out.println("My unregistered shapes: " + this.myUr.unregisteredShapes.size());
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")) {
             this.myMoveRectangle = MoveFactory.createMove(this.myAppState, startPoint);
             System.out.println("Mouse move pressed");
+            this.myUr.unregisteredShapes.clear();
+            System.out.println("My unregistered shapes: " + this.myUr.unregisteredShapes.size());
         }
         //If statement for if it's an ellipse or a triangle
     }

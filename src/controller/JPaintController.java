@@ -65,10 +65,19 @@ public class JPaintController implements IJPaintController {
             }
         };
 
+        IEventCallback callback4 = new IEventCallback() {
+            @Override
+            public void run() {
+                CopyShape copyShape = paintCanvas.MyCopyShape;
+                paintCanvas.MyCopyShape.DeleteMe();
+            }
+        };
+
         uiModule.addEvent(EventName.UNDO, callback);
         uiModule.addEvent(EventName.REDO, callback1);
         uiModule.addEvent(EventName.COPY, callback2);
         uiModule.addEvent(EventName.PASTE, callback3);
+        uiModule.addEvent(EventName.DELETE, callback4);
         //uiModule.addEvent(EventName.UNDO, () -> );
 
         /*IEventCallback callback = new IEventCallback() {

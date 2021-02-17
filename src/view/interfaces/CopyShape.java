@@ -59,4 +59,25 @@ public class CopyShape {
 
         paintCanvasBase.drawAllShapes();
     }
+
+    public void DeleteMe(){
+        ArrayList<OneShape> DeletedShapes = new ArrayList<OneShape>();
+        for(OneShape MyOneShape : MyCopyUndoRedo.registeredShapes){
+            if(MyOneShape.isSelected == true){
+                //MyOneShape.isSelected = false;
+                MyOneShape.IsCopied = false;
+                DeletedShapes.add(MyOneShape);
+                //MyOneShape.isSelected = false;
+            }
+        }
+
+        //MyCopyUndoRedo.registeredShapes.remove(MyOneShape);
+
+        for(OneShape MyOneShape : DeletedShapes){
+            MyCopyUndoRedo.registeredShapes.remove(MyOneShape);
+            MyCopyUndoRedo.unregisteredShapes.add(MyOneShape);
+        }
+
+        paintCanvasBase.drawAllShapes();
+    }
 }

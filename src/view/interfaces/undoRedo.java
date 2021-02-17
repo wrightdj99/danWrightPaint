@@ -44,7 +44,8 @@ public class undoRedo {
                 //System.out.println("Before " + this.registeredRect.size());
                 OneShape removedShape = this.registeredShapes.remove(this.registeredShapes.size() - 1);
                 this.unregisteredShapes.add(removedShape);
-                System.out.println("Done" + this.unregisteredShapes.size());
+                //System.out.println("Done" + this.unregisteredShapes.size());
+                System.out.println("My unregistered shapes: " + this.unregisteredShapes.size());
                 //System.out.println("After " + this.registeredRect.size());
             }
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")){
@@ -65,6 +66,21 @@ public class undoRedo {
                 //System.out.println("After " + this.registeredRect.size());
             }
         }
+
+        else if(this.myAppState.getActiveMouseMode().name().equals("SELECT")){
+            //System.out.println("This is coming soon, too");
+            ArrayList<OneShape> shapesToReturn = new ArrayList<OneShape>();
+            for(OneShape MyOneShape : this.unregisteredShapes){
+                shapesToReturn.add(MyOneShape);
+            }
+
+            for(OneShape MyOneShape : shapesToReturn){
+                unregisteredShapes.remove(MyOneShape);
+                registeredShapes.add(MyOneShape);
+            }
+        }
+
+
         paintCanvasBase.drawAllShapes();
 
 
@@ -117,6 +133,23 @@ public class undoRedo {
                 }
             }
 
+            paintCanvasBase.drawAllShapes();
+        }
+
+        else if(this.myAppState.getActiveMouseMode().name().equals("SELECT")){
+            System.out.println("Entering the method here ");
+            ArrayList<OneShape> shapesToDelete = new ArrayList<OneShape>();
+            //System.out.println("This is coming soon");
+            for(OneShape MyOneShape : this.registeredShapes){
+                if(MyOneShape.isSelected == true){
+                    shapesToDelete.add(MyOneShape);
+                    //System.out.println("unregisteredShapes: " + this.unregisteredShapes.size());
+                }
+            }
+            for(OneShape MyOneShape : shapesToDelete){
+                registeredShapes.remove(MyOneShape);
+                unregisteredShapes.add(MyOneShape);
+            }
             paintCanvasBase.drawAllShapes();
         }
     }
