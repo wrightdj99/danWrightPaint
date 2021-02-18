@@ -1,6 +1,8 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
+import view.gui.Triangle;
+import view.gui.paintPoint;
 
 public final class TriangleFactory {
     public static Triangle createTriangle(ApplicationState _appState, paintPoint startPoint){

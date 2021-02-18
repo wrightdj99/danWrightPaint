@@ -1,6 +1,7 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
+import view.interfaces.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -62,8 +63,8 @@ public class ClickHandler extends MouseAdapter {
         endPoint.y = e.getY();
         if (this.myAppState.getActiveMouseMode().name().equals("DRAW")) {
             this.myShape.endPoint = endPoint;
-            this.setShapeWidth((view.interfaces.myShape) this.myShape);
-            this.setShapeHeight((view.interfaces.myShape) this.myShape);
+            this.setShapeWidth((IShape) this.myShape);
+            this.setShapeHeight((IShape) this.myShape);
             //this.myShape.setMyHeight();
             //this.myShape.setMyWidth();
             //System.out.println(endPoint.x);
@@ -120,10 +121,10 @@ public class ClickHandler extends MouseAdapter {
         paintCanvasBase.drawAllShapes();
 
     }
-    private void setShapeWidth(myShape theShape){
+    private void setShapeWidth(IShape theShape){
         theShape.setMyWidth();
     }
-    private void setShapeHeight(myShape theShape){
+    private void setShapeHeight(IShape theShape){
         theShape.setMyHeight();
     }
 

@@ -1,5 +1,7 @@
 package view.interfaces;
 
+import view.gui.paintPoint;
+
 import java.awt.*;
 
 public abstract class OneShape {

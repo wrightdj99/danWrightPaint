@@ -1,4 +1,4 @@
-package view.interfaces;
+package view.gui;
 
 public class paintPoint {
     int x;

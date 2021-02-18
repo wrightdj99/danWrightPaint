@@ -1,10 +1,11 @@
-package view.interfaces;
+package view.gui;
 
-import model.ShapeType;
 import model.persistence.ApplicationState;
+import view.gui.paintPoint;
+import view.gui.undoRedo;
+import view.interfaces.OneShape;
+import view.interfaces.PaintCanvasBase;
 
-import java.awt.*;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class CopyShape {

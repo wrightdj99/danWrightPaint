@@ -1,6 +1,9 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
+import view.gui.MoveRectangle;
+import view.interfaces.OneShape;
+import view.interfaces.PaintCanvasBase;
 
 import java.util.ArrayList;
 

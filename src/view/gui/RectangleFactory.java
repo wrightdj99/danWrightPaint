@@ -1,6 +1,8 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
+import view.gui.Rectangle;
+import view.gui.paintPoint;
 
 public final class RectangleFactory {
     //paintPoint startPoint = new paintPoint();

@@ -3,6 +3,8 @@ package controller;
 import model.interfaces.IApplicationState;
 import model.persistence.ApplicationState;
 import view.EventName;
+import view.gui.CopyShape;
+import view.gui.undoRedo;
 import view.interfaces.*;
 
 public class JPaintController implements IJPaintController {

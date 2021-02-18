@@ -1,6 +1,9 @@
 package view.interfaces;
 
 import model.persistence.ApplicationState;
+import view.gui.ClickHandler;
+import view.gui.CopyShape;
+import view.gui.undoRedo;
 
 import javax.swing.*;
 import java.awt.*;

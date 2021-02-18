@@ -1,10 +1,11 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
+import view.interfaces.IShape;
 
 import java.awt.*;
 
-public class SelectionRectangle implements myShape{
+public class SelectionRectangle implements IShape {
     public paintPoint startPoint, endPoint;
     int width, height;
     public ApplicationState myAppState;

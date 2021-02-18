@@ -1,9 +1,5 @@
 package model;
 
-import view.interfaces.Ellipse;
-import view.interfaces.OneShape;
-
-import java.awt.*;
 import java.util.EnumMap;
 
 public class ShapeTypeMap {

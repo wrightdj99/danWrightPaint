@@ -1,14 +1,16 @@
-package view.interfaces;
+package view.gui;
 
 import model.ShapeColor;
 import model.ShapeColorMap;
 import model.ShapeShadingMap;
 import model.ShapeShadingType;
 import model.persistence.ApplicationState;
+import view.interfaces.OneShape;
+import view.interfaces.IShape;
 
 import java.awt.*;
 
-public class Ellipse extends OneShape implements myShape{
+public class Ellipse extends OneShape implements IShape {
     public ApplicationState myAppState;
     public ShapeColorMap myShapeColorMap;
     public ShapeShadingMap myShade;

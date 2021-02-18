@@ -4,7 +4,7 @@ import model.ShapeColor;
 
 import java.awt.*;
 
-public interface myShape {
+public interface IShape {
     //int getStartPoint();
     //int getEndPoint();
     void setMyWidth();

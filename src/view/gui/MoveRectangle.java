@@ -1,8 +1,9 @@
-package view.interfaces;
+package view.gui;
 
 import model.persistence.ApplicationState;
+import view.interfaces.IShape;
 
-public class MoveRectangle implements myShape {
+public class MoveRectangle implements IShape {
     paintPoint startPoint;
     paintPoint endPoint;
     int height, width;
