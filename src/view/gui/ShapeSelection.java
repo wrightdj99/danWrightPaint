@@ -5,21 +5,23 @@ import view.interfaces.IShape;
 
 import java.awt.*;
 
-public class SelectionRectangle implements IShape {
+public class ShapeSelection implements IShape {
     public paintPoint startPoint, endPoint;
     int width, height;
     public ApplicationState myAppState;
-    SelectionRectangle(ApplicationState _appState, paintPoint _startPoint){
+    ShapeSelection(ApplicationState _appState, paintPoint _startPoint){
         this.myAppState = _appState;
         this.startPoint = _startPoint;
     }
 
     public void draw(Graphics2D graphics2D){
-        Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-        graphics2D.setStroke(stroke);
-        graphics2D.setColor(Color.BLACK);
-        graphics2D.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-        graphics2D.setColor(Color.blue);
+        if(this.myAppState.getActiveShapeType().name().equals("RECTANGLE")){
+            Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+            graphics2D.setStroke(stroke);
+            graphics2D.setColor(Color.BLACK);
+            graphics2D.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
+            graphics2D.setColor(Color.blue);
+        }
     }
 
     public void setMyWidth(){

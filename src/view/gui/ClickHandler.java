@@ -17,7 +17,7 @@ public class ClickHandler extends MouseAdapter {
     public undoRedo myUr;
     private OneShape myShape;
     private MoveRectangle myMoveRectangle;
-    private SelectionRectangle mySelection;
+    private ShapeSelection mySelection;
 
     //private paintPoint StartPoint;
     //private paintPoint EndPoint;
@@ -42,16 +42,12 @@ public class ClickHandler extends MouseAdapter {
                 this.myShape = EllipseFactory.createEllipse(this.myAppState, startPoint);
             }
             this.myUr.unregisteredShapes.clear();
-            System.out.println("My unregistered shapes: " + this.myUr.unregisteredShapes.size());
         } else if (this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
             this.mySelection = SelectionFactory.CreateSelection(this.myAppState, startPoint);
             this.myUr.unregisteredShapes.clear();
-            System.out.println("My unregistered shapes: " + this.myUr.unregisteredShapes.size());
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")) {
             this.myMoveRectangle = MoveFactory.createMove(this.myAppState, startPoint);
-            System.out.println("Mouse move pressed");
             this.myUr.unregisteredShapes.clear();
-            System.out.println("My unregistered shapes: " + this.myUr.unregisteredShapes.size());
         }
         //If statement for if it's an ellipse or a triangle
     }
@@ -67,14 +63,11 @@ public class ClickHandler extends MouseAdapter {
             this.setShapeHeight((IShape) this.myShape);
             //this.myShape.setMyHeight();
             //this.myShape.setMyWidth();
-            //System.out.println(endPoint.x);
             //this.myRectangle.setMyColor(Color.blue);
             this.myShape.draw(this.paintCanvasBase.getGraphics2D());
             myUr.registeredShapes.add(this.myShape);
-            //System.out.println("ArrayList size " + myUr.registeredShapes.size());
             paintCanvasBase.clearItAll();
         } else if (this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
-            //System.out.println("This will be here soon");
             paintPoint startPoint;
             //this.mySelection.startPoint = startPoint;
             this.mySelection.endPoint = endPoint;
@@ -110,8 +103,17 @@ public class ClickHandler extends MouseAdapter {
 
             for (OneShape shape : myUr.registeredShapes) {
                 if (shape.isSelected == true) {
-                    shape.startPoint.x = shape.startPoint.x + this.myMoveRectangle.width;
-                    shape.startPoint.y = shape.startPoint.y + this.myMoveRectangle.height;
+                    if(myAppState.getActiveShapeType().name().equals("TRIANGLE")){
+                        /*int[] xPoints = {shape.startPoint.x + this.myMoveRectangle.width, shape.endPoint.x + this.myMoveRectangle.width, shape.startPoint.x + this.myMoveRectangle.width};
+                        int[] yPoints = {shape.startPoint.y + this.myMoveRectangle.height, shape.endPoint.y + this.myMoveRectangle.height, shape.endPoint.y + this.myMoveRectangle.height};*/
+                        shape.startPoint.x = shape.startPoint.x + this.myMoveRectangle.width;
+                        shape.startPoint.y = shape.startPoint.y + this.myMoveRectangle.height;
+                        shape.endPoint.x = shape.endPoint.x + this.myMoveRectangle.width;
+                        shape.endPoint.y = shape.endPoint.y + this.myMoveRectangle.height;
+                    }else{
+                        shape.startPoint.x = shape.startPoint.x + this.myMoveRectangle.width;
+                        shape.startPoint.y = shape.startPoint.y + this.myMoveRectangle.height;
+                    }
                 }
             }
 

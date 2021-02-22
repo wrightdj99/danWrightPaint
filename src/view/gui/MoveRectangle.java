@@ -13,10 +13,12 @@ public class MoveRectangle implements IShape {
         this.startPoint = _StartPoint;
     }
     public void setMyHeight(){
+
         this.height = this.endPoint.y - this.startPoint.y;
     }
 
     public void setMyWidth(){
+
         this.width = this.endPoint.x - this.startPoint.x;
     }
 

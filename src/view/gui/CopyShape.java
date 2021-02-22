@@ -26,8 +26,6 @@ public class CopyShape {
     }
 
     public void MyShapeCopy(){
-        //System.out.println("Shape is Copied");
-        System.out.println("Is copied");
         for(OneShape MyOneShape : MyCopyUndoRedo.registeredShapes){
             if(MyOneShape.isSelected == true){
                 MyOneShape.IsCopied = true;
@@ -40,12 +38,15 @@ public class CopyShape {
         //Loop to clone the shapes if they're selected
         for(OneShape MyOneShape : MyCopyUndoRedo.registeredShapes){
             if(MyOneShape.IsCopied == true){
-                //System.out.println("Let's Clone The Shape");
                 MyOneShape.isSelected = false;
                 MyOneShape.IsCopied = false;
                 OneShape newShape = MyOneShape.CloneMe();
                 newShape.isSelected = true;
                 newShape.IsCopied = true;
+                /*newShape.startPoint.x = newShape.startPoint.x + 10;
+                newShape.startPoint.y = newShape.startPoint.y - 10;
+                newShape.endPoint.x = newShape.endPoint.x + 10;
+                newShape.endPoint.y = newShape.endPoint.y - 10;*/
                 pastedShapes.add(newShape);
             }
         }
@@ -53,11 +54,6 @@ public class CopyShape {
         for(OneShape MyOneShape : pastedShapes){
             MyCopyUndoRedo.registeredShapes.add(MyOneShape);
         }
-
-
-        System.out.println("Our pasted size: " + pastedShapes.size() + "\n");
-        System.out.println("Our registered shape size: " + MyCopyUndoRedo.registeredShapes.size() + "\n");
-
         paintCanvasBase.drawAllShapes();
     }
 

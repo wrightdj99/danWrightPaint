@@ -47,7 +47,6 @@ public class JPaintController implements IJPaintController {
             public void run() {
                 undoRedo myUndoRedo1 = paintCanvas.myUndoRedo;
                 myUndoRedo1.myRedo();
-                //System.out.println("cba");
             }
         };
 
