@@ -17,7 +17,7 @@ public class ClickHandler extends MouseAdapter {
     public undoRedo myUr;
     private OneShape myShape;
     private MoveRectangle myMoveRectangle;
-    private ShapeSelection mySelection;
+    private RectangleSelection mySelection;
 
     //private paintPoint StartPoint;
     //private paintPoint EndPoint;

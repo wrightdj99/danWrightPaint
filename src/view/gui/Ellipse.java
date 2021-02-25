@@ -14,7 +14,7 @@ public class Ellipse extends OneShape implements IShape {
     public ApplicationState myAppState;
     public ShapeColorMap myShapeColorMap;
     public ShapeShadingMap myShade;
-    private ShapeSelection EllipseSelected;
+    private RectangleSelection EllipseSelected;
     ShapeColor myColor;
     ShapeColor mySecondaryColor;
     ShapeShadingType myActiveShade;
@@ -28,54 +28,6 @@ public class Ellipse extends OneShape implements IShape {
         this.myShapeColorMap = new ShapeColorMap();
         this.isSelected = false;
     }
-
-    /*public void draw(Graphics2D graphics2D){
-        //System.out.println("We drew an Ellipse!");
-        if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)){
-            if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.drawOval(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-                graphics2D.setColor(Color.blue);
-            }
-            else{
-                graphics2D.setColor(this.myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
-                graphics2D.fillOval(this.startPoint.x - 10, this.startPoint.y - 10, this.width + 10, this.height + 10);
-                graphics2D.setColor(Color.WHITE);
-            }
-        }
-
-        else if(this.myActiveShade.equals(this.myActiveShade.OUTLINE_AND_FILLED_IN)){
-            if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.drawOval(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-                graphics2D.setColor(Color.blue);
-            }
-            else{
-                graphics2D.setColor(this.myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
-                graphics2D.fillOval(this.startPoint.x - 10, this.startPoint.y - 10, this.width + 10, this.height + 10);
-                graphics2D.setColor(this.myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
-            }
-        }
-
-        else{
-            if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.drawOval(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-                graphics2D.setColor(Color.blue);
-            }
-            else{
-                graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
-            }
-        }
-
-        graphics2D.fillOval(this.startPoint.x - 5, this.startPoint.y - 5, this.width, this.height);
-    }*/
 
     public void setMyWidth(){
         int endWidth = this.endPoint.x - this.startPoint.x;
@@ -101,41 +53,32 @@ public class Ellipse extends OneShape implements IShape {
         //System.out.println("We drew an Ellipse!");
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)){
             if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.drawOval(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-                graphics2D.setColor(Color.blue);
+                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this);
+                selectionEllipseDecorator.draw(graphics2D);
             }
             else{
                 graphics2D.setColor(this.myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
-                graphics2D.fillOval(this.startPoint.x - 10, this.startPoint.y - 10, this.width + 10, this.height + 10);
+                graphics2D.fillOval(this.startPoint.x - 10, this.startPoint.y - 10, this.width + 20, this.height + 20);
                 graphics2D.setColor(Color.WHITE);
             }
         }
 
         else if(this.myActiveShade.equals(this.myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.drawOval(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-                graphics2D.setColor(Color.blue);
+                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this);
+                selectionEllipseDecorator.draw(graphics2D);
             }
             else{
                 graphics2D.setColor(this.myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
-                graphics2D.fillOval(this.startPoint.x - 10, this.startPoint.y - 10, this.width + 10, this.height + 10);
+                graphics2D.fillOval(this.startPoint.x - 10, this.startPoint.y - 10, this.width + 20, this.height + 20);
                 graphics2D.setColor(this.myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
             }
         }
 
         else{
             if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.drawOval(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-                graphics2D.setColor(Color.blue);
+                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this);
+                selectionEllipseDecorator.draw(graphics2D);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));

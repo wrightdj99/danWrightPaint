@@ -39,39 +39,22 @@ public class Triangle extends OneShape implements IShape {
         int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
             if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
-                int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
-                graphics2D.drawPolygon(xPoints, yPoints, 3);
-                graphics2D.setColor(Color.blue);
+                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this);
+                selectionTriangleDecorator.draw(graphics2D);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
-            /*int[] xPoints = {this.startPoint.x - 5, this.endPoint.x - 5, this.startPoint.x - 5};
-            int[] yPoints = {this.startPoint.y - 5, this.endPoint.y - 5, this.endPoint.y - 5};
-            graphics2D.fillPolygon(xPoints, yPoints, 3);*/
-                //int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
-                //int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
                 int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
                 int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
                 graphics2D.fillPolygon(xPoints, yPoints, 3);
                 graphics2D.setColor(Color.WHITE);
-                //graphics2D.fillRect(this.startPoint.x - 5, this.startPoint.y - 5, this.width + 10, this.height + 10);
-                //graphics2D.setColor(Color.white);
             }
         }
 
         else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
-                int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
-                graphics2D.drawPolygon(xPoints, yPoints, 3);
-                graphics2D.setColor(Color.blue);
+                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this);
+                selectionTriangleDecorator.draw(graphics2D);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
@@ -86,13 +69,8 @@ public class Triangle extends OneShape implements IShape {
 
         else{
             if(this.isSelected == true){
-                Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-                graphics2D.setStroke(stroke);
-                graphics2D.setColor(Color.BLACK);
-                int[] xPoints = {this.startPoint.x - 5, this.endPoint.x + funnyX, this.startPoint.x - 5};
-                int[] yPoints = {this.startPoint.y - funnyY, this.endPoint.y + 5, this.endPoint.y + 5};
-                graphics2D.drawPolygon(xPoints, yPoints, 3);
-                graphics2D.setColor(Color.blue);
+                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this);
+                selectionTriangleDecorator.draw(graphics2D);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
