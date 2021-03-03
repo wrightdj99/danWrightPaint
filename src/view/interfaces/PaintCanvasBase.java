@@ -3,6 +3,7 @@ package view.interfaces;
 import model.persistence.ApplicationState;
 import view.gui.ClickHandler;
 import view.gui.CopyShape;
+import view.gui.MyGroup;
 import view.gui.undoRedo;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public abstract class PaintCanvasBase extends JComponent {
         this.MyClickHandler = new ClickHandler(this, this.myUndoRedo);
         this.addMouseListener(this.MyClickHandler);
         this.MyCopyShape = new CopyShape(this, myAppState);
+        this.myGroup = new MyGroup(this);
         //this.myUR = new undoRedo(this);
     }
     public void drawAllShapes(){
@@ -99,6 +101,7 @@ public abstract class PaintCanvasBase extends JComponent {
     public undoRedo myUndoRedo;
     public ApplicationState myAppState;
     public CopyShape MyCopyShape;
+    public MyGroup myGroup;
     //public undoRedo myUR;
     //public paintPoint StartPoint;
     //public paintPoint EndPoint;

@@ -4,6 +4,7 @@ import model.interfaces.IApplicationState;
 import model.persistence.ApplicationState;
 import view.EventName;
 import view.gui.CopyShape;
+import view.gui.MyGroup;
 import view.gui.undoRedo;
 import view.interfaces.*;
 
@@ -11,6 +12,7 @@ public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
     private final IApplicationState applicationState;
     private final PaintCanvasBase paintCanvas;
+    //private final MyGroup myGroup;
 
 
     public JPaintController(IUiModule uiModule, IApplicationState applicationState, PaintCanvasBase paintCanvas) {
@@ -66,11 +68,25 @@ public class JPaintController implements IJPaintController {
             }
         };
 
+        IEventCallback callback5 = new IEventCallback() {
+            @Override
+            public void run() {
+                MyGroup myGroup = paintCanvas.myGroup;
+                paintCanvas.myGroup.draw();
+            }
+        };
+
+        IEventCallback callback6 = new IEventCallback() {
+            @Override
+            public void run() {
+
+            }
+        };
+
         IEventCallback callback4 = new IEventCallback() {
             @Override
             public void run() {
-                CopyShape copyShape = paintCanvas.MyCopyShape;
-                paintCanvas.MyCopyShape.DeleteMe();
+
             }
         };
 
@@ -79,14 +95,8 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.COPY, callback2);
         uiModule.addEvent(EventName.PASTE, callback3);
         uiModule.addEvent(EventName.DELETE, callback4);
-        //uiModule.addEvent(EventName.UNDO, () -> );
+        uiModule.addEvent(EventName.GROUP, callback5);
+        uiModule.addEvent(EventName.UNGROUP, callback6);
 
-        /*IEventCallback callback = new IEventCallback() {
-            @Override
-            public void run() {
-                //ICommand cmd = new undoRedo;
-
-            }
-        }*/
     }
 }
