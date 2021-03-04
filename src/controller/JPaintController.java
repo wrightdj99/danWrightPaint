@@ -8,6 +8,8 @@ import view.gui.MyGroup;
 import view.gui.undoRedo;
 import view.interfaces.*;
 
+import java.awt.*;
+
 public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
     private final IApplicationState applicationState;
@@ -70,9 +72,10 @@ public class JPaintController implements IJPaintController {
 
         IEventCallback callback5 = new IEventCallback() {
             @Override
-            public void run() {
+            public void run(){
                 MyGroup myGroup = paintCanvas.myGroup;
-                paintCanvas.myGroup.draw();
+                paintCanvas.myGroup.GroupMe();
+                //paintCanvas.myGroup.draw(paintCanvas.getGraphics2D());
             }
         };
 
