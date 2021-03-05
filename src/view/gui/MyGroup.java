@@ -23,10 +23,10 @@ public class MyGroup implements IShape {
     public ArrayList<OneShape> RegisteredGroups;
     public ArrayList<OneShape> UnregisteredGroups;
     public undoRedo myUr;
-    int highestStartPointx = 0;
-    int highestStartPointy = 0;
-    int lowestEndPointx = Integer.MAX_VALUE;
-    int lowestEndPointy = Integer.MAX_VALUE;
+    int highestStartPointx = Integer.MAX_VALUE;
+    int highestStartPointy = Integer.MAX_VALUE;
+    int lowestEndPointx = 0;
+    int lowestEndPointy = 0;
     int MyGroupWidth = 0;
     int MyGroupHeight = 0;
     /*int lowestEndPoint = 0;
@@ -39,30 +39,39 @@ public class MyGroup implements IShape {
                 RegisteredGroups.add(MyShape);
             }
         }
+        System.out.println("Total items in RegisteredGroups is: " + RegisteredGroups.size());
         for(OneShape MyShape : RegisteredGroups){
             //Highest start point
-            if(MyShape.startPoint.x > highestStartPointx){
+            if(MyShape.startPoint.x < highestStartPointx){
                 highestStartPointx = MyShape.startPoint.x;
             }
-            if(MyShape.startPoint.y > highestStartPointy){
+            if(MyShape.startPoint.y < highestStartPointy){
                 highestStartPointy = MyShape.startPoint.y;
             }
             //Lowest end point
-            if(MyShape.endPoint.x < lowestEndPointx){
+            if(MyShape.endPoint.x > lowestEndPointx){
                 lowestEndPointx = MyShape.endPoint.x;
             }
-            if(MyShape.endPoint.y < lowestEndPointy){
+            if(MyShape.endPoint.y > lowestEndPointy){
                 lowestEndPointy = MyShape.endPoint.y;
             }
         }
         System.out.println("This is our lowest start point: " + lowestEndPointx + ", " + lowestEndPointy);
         System.out.println("This is our greatest end point: " + highestStartPointx + ", " + highestStartPointy);
-        GroupedShape MyOneGroup = new GroupedShape(MyAppState, highestStartPointx, highestStartPointy);
+        paintPoint groupStartPoint = new paintPoint();
+        groupStartPoint.y = highestStartPointy;
+        groupStartPoint.x = highestStartPointx;
+        paintPoint groupEndPoint = new paintPoint();
+        groupEndPoint.y = lowestEndPointy;
+        groupEndPoint.x = lowestEndPointx;
+        GroupedShape MyOneGroup = new GroupedShape(MyAppState, groupStartPoint, groupEndPoint);
+
         MyOneGroup.setMyHeight();
         MyOneGroup.setMyWidth();
         MyOneGroup.draw(paintCanvasBase.getGraphics2D());
-        System.out.println("This is our width: " + MyOneGroup.width);
-        System.out.println("This is our height: " + MyOneGroup.height);
+
+        //System.out.println("This is our width: " + myRepresentativeWidth);
+        //System.out.println("This is our height: " + myRepresentativeHeight);
 
     }
 
@@ -71,10 +80,10 @@ public class MyGroup implements IShape {
     }
 
     public void setMyWidth(){
-        MyGroupWidth = highestStartPointx - lowestEndPointx;
+        //MyGroupWidth = highestStartPointx - lowestEndPointx;
     }
 
     public void setMyHeight(){
-        MyGroupHeight = highestStartPointy - lowestEndPointy;
+        //MyGroupHeight = highestStartPointy - lowestEndPointy;
     }
 }

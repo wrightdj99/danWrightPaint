@@ -6,46 +6,51 @@ import view.interfaces.OneShape;
 
 import java.awt.*;
 
-public class GroupedShape implements IShape {
+public class GroupedShape extends OneShape implements IShape {
     //public paintPoint startPoint, endPoint;
-    int startPointx, startPointy;
-    int endPointx, endPointy;
+    //int startPointx, startPointy;
+    //int endPointx, endPointy;
     int width, height;
+    int endWidth, endHeight;
     public ApplicationState applicationState;
     public MyGroup myGroup;
-    public GroupedShape(ApplicationState _myApp, int startPointx, int startPointy){
+    public GroupedShape(ApplicationState _myApp, paintPoint _startPoint, paintPoint _endPoint){
         this.applicationState = _myApp;
-        //this.startPoint = _startPoint;
-        this.startPointx = startPointx;
-        this.startPointy = startPointy;
-        this.myGroup = myGroup;
+        this.startPoint = _startPoint;
+        this.endPoint = _endPoint;
     }
 
     public void setMyWidth() {
-        this.width = this.endPointx - this.startPointx;
-        if(this.width < 0){
-            this.width = this.width * -1;
+        endWidth = this.startPoint.x - this.endPoint.x;
+        if(endWidth < 0){
+            endWidth = endWidth * -1;
         }
         else{
 
         }
+        this.width = endWidth;
+
 
     }
 
     public void setMyHeight() {
-        this.height = this.endPointy - this.startPointy;
-        if(this.height < 0){
-            this.height = this.height * -1;
+        endHeight = this.startPoint.y - this.endPoint.y;
+        if(endHeight < 0){
+            endHeight = endHeight * -1;
         }
         else{
 
         }
+        this.height = endHeight;
     }
-
+    @Override
+    public OneShape CloneMe(){
+        return null;
+    }
     public void draw(Graphics2D graphics2D){
         Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
         graphics2D.setStroke(stroke);
         graphics2D.setColor(Color.BLACK);
-        graphics2D.drawRect(this.startPointx - 15, this.startPointy - 15, this.width + 30, this.height + 30);
+        graphics2D.drawRect(this.startPoint.x, this.startPoint.y, this.width, this.height);
     }
 }
