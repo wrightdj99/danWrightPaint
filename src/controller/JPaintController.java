@@ -82,7 +82,8 @@ public class JPaintController implements IJPaintController {
         IEventCallback callback6 = new IEventCallback() {
             @Override
             public void run() {
-
+                MyGroup myGroup = paintCanvas.myGroup;
+                paintCanvas.myGroup.MyUngroup();
             }
         };
 

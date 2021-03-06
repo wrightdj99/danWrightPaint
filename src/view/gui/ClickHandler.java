@@ -18,6 +18,9 @@ public class ClickHandler extends MouseAdapter {
     private OneShape myShape;
     private MoveRectangle myMoveRectangle;
     private RectangleSelection mySelection;
+    private MyGroup myGroup;
+    private GroupedShape groupedShape;
+
 
     //private paintPoint StartPoint;
     //private paintPoint EndPoint;
@@ -92,6 +95,16 @@ public class ClickHandler extends MouseAdapter {
                 } else {
                     shape.isSelected = false;
                 }
+                /*if (this shape is a GroupedShape){
+                    call recursive method;
+                }*/
+                /*if(shape instanceof GroupedShape){
+                    ShapeRecursion(groupedShape);
+                }*/
+                if(shape.isSelected == true && shape instanceof GroupedShape){
+                    shape.isSelected = true;
+                    ShapeRecursion((GroupedShape) shape);
+                }
             }
 
 
@@ -122,6 +135,27 @@ public class ClickHandler extends MouseAdapter {
         }
         paintCanvasBase.drawAllShapes();
 
+    }
+    /*private thing recursiveMethod(grouped shape){
+        loop through registered shapes for this GroupedShape
+            set each shape to selected
+                if the registered shape is a GroupedShape, RECURSE (call this method again)
+    }*/
+    /*private void ShapeRecursion(GroupedShape grouped){
+        for(OneShape shape : myUr.registeredShapes){
+            if(shape instanceof GroupedShape){
+                grouped.isSelected = true;
+            }
+        }
+        ShapeRecursion(grouped);
+    }*/
+    private void ShapeRecursion(GroupedShape gS){
+        for(OneShape shape : gS.MyShapes){
+            shape.isSelected = true;
+            if(shape instanceof GroupedShape){
+                ShapeRecursion((GroupedShape) shape);
+            }
+        }
     }
     private void setShapeWidth(IShape theShape){
         theShape.setMyWidth();
