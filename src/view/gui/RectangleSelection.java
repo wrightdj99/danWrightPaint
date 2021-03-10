@@ -16,11 +16,11 @@ public class RectangleSelection implements IShape {
         this.startPoint = _startPoint;
     }
     public void draw(Graphics2D graphics2D){
-            Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
-            graphics2D.setStroke(stroke);
+            //Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
+            //graphics2D.setStroke(stroke);
             graphics2D.setColor(Color.BLACK);
             graphics2D.drawRect(this.startPoint.x - 15, this.startPoint.y - 15, this.width + 30, this.height + 30);
-            graphics2D.setColor(Color.blue);
+            graphics2D.setColor(Color.pink);
     }
 
     public void setMyWidth(){

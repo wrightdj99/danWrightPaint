@@ -41,15 +41,24 @@ public class MyGroup implements IShape {
         groupEndPoint = new paintPoint();
         groupStartPoint = new paintPoint();
         this.MyOneGroup =  new GroupedShape(MyAppState, groupStartPoint, groupEndPoint);
+        this.MyOneGroup.isSelected = true;
         this.highestStartPointx = Integer.MAX_VALUE;
         this.highestStartPointy = Integer.MAX_VALUE;
         this.lowestEndPointx = 0;
         this.lowestEndPointy = 0;
         for(OneShape MyShape : myUr.registeredShapes){
             if(MyShape.isSelected){
-                this.MyOneGroup.MyShapes.add(MyShape);
+                if(MyOneGroup.MyShapes.contains(MyOneShape)){
+                    MyOneGroup.MyShapes.remove(MyOneShape);
+                }
+                else{
+                    this.MyOneGroup.MyShapes.add(MyShape);
+                }
             }
         }
+        /*if(MyOneGroup.MyShapes.contains(this.MyOneShape)){
+            MyOneGroup.MyShapes.remove(this.MyOneShape);
+        }*/
 
         System.out.println("Total items in RegisteredGroups is: " + this.MyOneGroup.MyShapes.size());
         for(OneShape MyShape : this.MyOneGroup.MyShapes){
@@ -80,41 +89,68 @@ public class MyGroup implements IShape {
         //GroupedShape MyOneGroup = new GroupedShape(MyAppState, groupStartPoint, groupEndPoint);
         MyOneGroup.setMyHeight();
         MyOneGroup.setMyWidth();
-        MyOneGroup.draw(paintCanvasBase.getGraphics2D());
-        //System.out.println("Before: " + RegisteredGroupShapes.size());
-        System.out.println("Shapes in list we want: " + this.MyOneGroup.MyShapes.size());
-        //System.out.println("B4: " + myUr.registeredShapes.size());
-        //this.RegisteredGroupShapes.add(MyOneGroup);
+        System.out.println("Registered Group Shapes: " + this.MyOneGroup.MyShapes.size());
         myUr.registeredShapes.add(this.MyOneGroup);
-
-        //System.out.println("After: " + RegisteredGroupShapes.size());
-        //System.out.println("AFARTAR: " + myUr.registeredShapes.size());
-
-
-        //System.out.println("This is our width: " + myRepresentativeWidth);
-        //System.out.println("This is our height: " + myRepresentativeHeight);
+        //MyOneGroup.draw(paintCanvasBase.getGraphics2D());
+        paintCanvasBase.drawAllShapes();
 
     }
 
     public void MyUngroup(){
+
         if(this.MyOneGroup.MyShapes.size() == 0 && this.MyOneGroup.MyShapes.size() == 0){
             System.out.println("No more groups");
         }
         else{
-            /*for(OneShape MyShape : RegisteredGroupShapes){
-                MyShape.isSelected = true;
-                //RegisteredGroups.remove(MyShape);
-                UnregisteredGroupShapes.add(MyShape);
+            /*for(OneShape MyShape : this.MyOneGroup.MyShapes){
+                if(MyShape.isSelected){
+                    MyShape.isSelected = false;
+                    //this.MyOneGroup.MyShapes.remove(MyShape);
+                }
+            }*/
+            //OneShape UngroupedShape = this.MyOneGroup.MyShapes.remove(this.MyOneGroup.MyShapes.size() - 1);
+            //myUr.registeredShapes.remove(UngroupedShape);
+            //this.MyOneGroup.MyShapes.remove(UngroupedShape);
+            /*for(MyOneShapeDel : myUr.registeredShapes){
+                if(MyOneShapeDel instanceof GroupedShape){
+                    //myUr.registeredShapes.remove(MyOneShape);
+                    MyOneShapeDel.isSelected = false;
+                }
+                //myUr.registeredShapes.remove(MyOneShapeDel);
+            }*/
+            /*for(OneShape MyOneShapeDel : myUr.registeredShapes){
+                if(MyOneShapeDel instanceof GroupedShape){
+                    myUr.registeredShapes.remove(MyOneShapeDel);
+                    myUr.unregisteredShapes.add(MyOneShapeDel);
+                }
+            }*/
+            /*OneShape UngroupedShape = this.MyOneGroup.MyShapes.remove(this.MyOneGroup.MyShapes.size() - 1);
+
+            if(UngroupedShape instanceof GroupedShape){
+                //this.MyOneGroup.MyShapes.remove(UngroupedShape);
+                this.MyOneGroup.MyShapes.clear();
+            }*/
+            GroupedShape shapeToRemove = null;
+            for(OneShape shape : this.myUr.registeredShapes){
+                if (shape instanceof  GroupedShape){
+                    shapeToRemove = (GroupedShape) shape;
+                }
             }
-            RegisteredGroupShapes.remove(MyGroupedShape);*/
-            //for(OneShape MyShape : myUr.registeredShapes){
-
-            //}
-            myUr.registeredShapes.remove(MyOneGroup);
-
-            System.out.println("RegisteredGroups size: " + this.MyOneGroup.MyShapes.size());
-            System.out.println("UnregisteredGroups size: " + this.MyOneGroup.MyShapes.size());
-
+            if (shapeToRemove != null){
+                for(OneShape shape : this.MyOneGroup.MyShapes){
+                    shape.isSelected = false;
+                }
+                this.myUr.registeredShapes.remove(shapeToRemove);
+            }
+            /*
+            this.MyOneGroup = (GroupedShape) MyOneGroup.MyShapes.remove(this.MyOneGroup.MyShapes.size() - 1);
+            this.MyOneGroup.MyShapes.clear();
+            if(MyOneGroup instanceof GroupedShape){
+                this.MyOneGroup.isSelected = false;
+                myUr.unregisteredShapes.remove(this.MyOneGroup);
+            }
+            */
+            System.out.println(this.MyOneGroup.MyShapes.size());
         }
         paintCanvasBase.drawAllShapes();
     }

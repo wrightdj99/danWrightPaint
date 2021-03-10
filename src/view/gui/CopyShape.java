@@ -14,6 +14,7 @@ public class CopyShape {
     paintPoint StartPoint, EndPoint;
     private OneShape ClonedShape;
     int width, height;
+    private GroupedShape CopyGroup;
     private undoRedo MyCopyUndoRedo;
     //public ShapeType MyShapeType;
     //public ArrayList<OneShape> registeredShapes;
@@ -29,31 +30,51 @@ public class CopyShape {
         for(OneShape MyOneShape : MyCopyUndoRedo.registeredShapes){
             if(MyOneShape.isSelected == true){
                 MyOneShape.IsCopied = true;
+                if(MyOneShape instanceof GroupedShape){
+                    System.out.println("This is a grouped shape");
+
+                }
             }
         }
     }
 
     public void MyShapePaste(){
         ArrayList<OneShape> pastedShapes = new ArrayList<OneShape>();
+        //Loop first to clone the GROUPED shapes
+        for(OneShape MyOneShape : MyCopyUndoRedo.registeredShapes) {
+            if(MyOneShape.IsCopied == true && MyOneShape instanceof GroupedShape) {
+                MyOneShape.isSelected = false;
+                MyOneShape.IsCopied = false;
+
+                GroupedShape newGroupedShape = (GroupedShape) MyOneShape.CloneMe();
+                newGroupedShape.isSelected = true;
+                newGroupedShape.IsCopied = true;
+                pastedShapes.add(newGroupedShape);
+                for(OneShape newShape : newGroupedShape.MyShapes){
+                    pastedShapes.add(newShape);
+                }
+            }
+        }
         //Loop to clone the shapes if they're selected
         for(OneShape MyOneShape : MyCopyUndoRedo.registeredShapes){
             if(MyOneShape.IsCopied == true){
-                MyOneShape.isSelected = false;
-                MyOneShape.IsCopied = false;
-                OneShape newShape = MyOneShape.CloneMe();
-                newShape.isSelected = true;
-                newShape.IsCopied = true;
-                /*newShape.startPoint.x = newShape.startPoint.x + 10;
-                newShape.startPoint.y = newShape.startPoint.y - 10;
-                newShape.endPoint.x = newShape.endPoint.x + 10;
-                newShape.endPoint.y = newShape.endPoint.y - 10;*/
-                pastedShapes.add(newShape);
+                if (MyOneShape instanceof  GroupedShape){
+                    //do nothing. we're ignoring groupedShapes here.
+                }else{
+                    MyOneShape.isSelected = false;
+                    MyOneShape.IsCopied = false;
+                    OneShape newShape = MyOneShape.CloneMe();
+                    newShape.isSelected = true;
+                    newShape.IsCopied = true;
+                    pastedShapes.add(newShape);
+                }
             }
         }
         //Loop to add our shapes to registeredshapes
         for(OneShape MyOneShape : pastedShapes){
             MyCopyUndoRedo.registeredShapes.add(MyOneShape);
         }
+        paintCanvasBase.clearItAll();
         paintCanvasBase.drawAllShapes();
     }
 
@@ -67,14 +88,10 @@ public class CopyShape {
                 //MyOneShape.isSelected = false;
             }
         }
-
-        //MyCopyUndoRedo.registeredShapes.remove(MyOneShape);
-
         for(OneShape MyOneShape : DeletedShapes){
             MyCopyUndoRedo.registeredShapes.remove(MyOneShape);
             MyCopyUndoRedo.unregisteredShapes.add(MyOneShape);
         }
-
         paintCanvasBase.drawAllShapes();
     }
 }

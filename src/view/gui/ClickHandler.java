@@ -67,7 +67,7 @@ public class ClickHandler extends MouseAdapter {
             //this.myShape.setMyHeight();
             //this.myShape.setMyWidth();
             //this.myRectangle.setMyColor(Color.blue);
-            this.myShape.draw(this.paintCanvasBase.getGraphics2D());
+            //this.myShape.draw(this.paintCanvasBase.getGraphics2D());
             myUr.registeredShapes.add(this.myShape);
             paintCanvasBase.clearItAll();
         } else if (this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
@@ -87,10 +87,14 @@ public class ClickHandler extends MouseAdapter {
                 if (mySelection.startPoint.y < shape.startPoint.y && mySelection.endPoint.y > shape.endPoint.y) {
                     if (mySelection.startPoint.x < shape.startPoint.x && mySelection.endPoint.x > shape.endPoint.x) {
                         shape.isSelected = true;
+                    }else{
+                        shape.isSelected = false;
                     }
                 } else if (mySelection.startPoint.x > shape.startPoint.x && mySelection.endPoint.x < shape.endPoint.x) {
                     if (mySelection.startPoint.y > shape.startPoint.y && mySelection.endPoint.y < shape.endPoint.y) {
                         shape.isSelected = true;
+                    }else{
+                        shape.isSelected = false;
                     }
                 } else {
                     shape.isSelected = false;
@@ -101,13 +105,18 @@ public class ClickHandler extends MouseAdapter {
                 /*if(shape instanceof GroupedShape){
                     ShapeRecursion(groupedShape);
                 }*/
+            }
+            for(OneShape shape : myUr.registeredShapes){
                 if(shape.isSelected == true && shape instanceof GroupedShape){
                     shape.isSelected = true;
                     ShapeRecursion((GroupedShape) shape);
                 }
             }
-
-
+            for(OneShape shape : myUr.registeredShapes){
+                if (shape.isSelected == true) {
+                    SelectGroupsIAmPartOf(shape);
+                }
+            }
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")) {
             this.myMoveRectangle.endPoint = endPoint;
             this.myMoveRectangle.setMyHeight();
@@ -126,6 +135,8 @@ public class ClickHandler extends MouseAdapter {
                     }else{
                         shape.startPoint.x = shape.startPoint.x + this.myMoveRectangle.width;
                         shape.startPoint.y = shape.startPoint.y + this.myMoveRectangle.height;
+                        shape.endPoint.x = shape.endPoint.x + this.myMoveRectangle.width;
+                        shape.endPoint.y = shape.endPoint.y + this.myMoveRectangle.height;
                     }
                 }
             }
@@ -149,7 +160,20 @@ public class ClickHandler extends MouseAdapter {
         }
         ShapeRecursion(grouped);
     }*/
+    private void SelectGroupsIAmPartOf(OneShape selectedShape){
+        for (OneShape shape : myUr.registeredShapes) {
+            if (shape instanceof GroupedShape){
+
+                GroupedShape groupedShape = (GroupedShape)shape;
+                if (groupedShape.MyShapes.contains(selectedShape)){
+                    ShapeRecursion(groupedShape);
+                }
+            }
+        }
+
+    }
     private void ShapeRecursion(GroupedShape gS){
+        gS.isSelected = true;
         for(OneShape shape : gS.MyShapes){
             shape.isSelected = true;
             if(shape instanceof GroupedShape){

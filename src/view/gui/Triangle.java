@@ -9,6 +9,7 @@ import view.interfaces.OneShape;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Triangle extends OneShape implements IShape {
     public ApplicationState myAppState;
@@ -32,15 +33,16 @@ public class Triangle extends OneShape implements IShape {
 
     }
 
-    public void draw(Graphics2D graphics2D){
+    public void draw(Graphics2D graphics2D, ArrayList<OneShape> registeredShapes){
         this.setMyHeight();
         this.setMyWidth();
         int funnyX = (int)Math.round((float)this.width / (float)this.height * 10D);
         int funnyY = (int)Math.round((float)this.height / (float)this.width * 10D);
+        boolean _amIPartOfAGroup = this.CheckIfIAmPartOfAGroup(registeredShapes);
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
             if(this.isSelected == true){
-                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this);
-                selectionTriangleDecorator.draw(graphics2D);
+                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this, _amIPartOfAGroup);
+                selectionTriangleDecorator.draw(graphics2D, registeredShapes);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
@@ -53,8 +55,8 @@ public class Triangle extends OneShape implements IShape {
 
         else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this);
-                selectionTriangleDecorator.draw(graphics2D);
+                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this, _amIPartOfAGroup);
+                selectionTriangleDecorator.draw(graphics2D, registeredShapes);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
@@ -69,8 +71,8 @@ public class Triangle extends OneShape implements IShape {
 
         else{
             if(this.isSelected == true){
-                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this);
-                selectionTriangleDecorator.draw(graphics2D);
+                SelectionTriangleDecorator selectionTriangleDecorator = new SelectionTriangleDecorator(this, _amIPartOfAGroup);
+                selectionTriangleDecorator.draw(graphics2D, registeredShapes);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
@@ -91,7 +93,10 @@ public class Triangle extends OneShape implements IShape {
         int endWidth = this.endPoint.x - this.startPoint.x;
         if (endWidth < 0){
             endWidth = -1 * endWidth;
-            this.startPoint.x = this.startPoint.x - endWidth;
+            this.endPoint.x = this.startPoint.x - endWidth;
+            //this.startPoint.x = this.startPoint.x - endWidth;
+            //this.endPoint.x = this.endPoint.x - endWidth;
+            //this.startPoint.x = this.startPoint.x - endWidth;
         }
         this.width = endWidth;
     }
@@ -100,8 +105,9 @@ public class Triangle extends OneShape implements IShape {
         int endHeight = this.endPoint.y - this.startPoint.y;
         if (endHeight < 0){
             endHeight = -1 * endHeight;
-            this.startPoint.y = this.startPoint.y - endHeight;
-            this.endPoint.y = this.endPoint.y - endHeight;
+            this.endPoint.y = this.startPoint.y - endHeight;
+            //this.startPoint.y = this.startPoint.y - endHeight;
+            //this.endPoint.y = this.endPoint.y - endHeight;
         }
         this.height = endHeight;
     }

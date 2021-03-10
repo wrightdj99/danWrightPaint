@@ -18,6 +18,8 @@ public class undoRedo {
     }
 
     public ApplicationState myAppState;
+    private GroupedShape GroupToRedo = null;
+    private GroupedShape GroupToUndo = null;
     private PaintCanvasBase paintCanvasBase;
     public ArrayList<OneShape> registeredShapes;
     public ArrayList<OneShape> unregisteredShapes;
@@ -29,7 +31,7 @@ public class undoRedo {
     }
 
     public void myUndo(){
-        if (this.myAppState.getActiveMouseMode().name().equals("DRAW")) {
+        if (this.myAppState.getActiveMouseMode().name().equals("DRAW") || this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
             if (this.registeredShapes.size() == 0) {
                 System.out.println("Registered Shapes is empty");
             } else {
@@ -62,40 +64,42 @@ public class undoRedo {
 
             }
         }
-
-        else if(this.myAppState.getActiveMouseMode().name().equals("SELECT")){
+        /*
+        else if(this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
             ArrayList<OneShape> shapesToReturn = new ArrayList<OneShape>();
-            for(OneShape MyOneShape : this.unregisteredShapes){
+            //GroupedShape GroupToUndo = null;
+            for (OneShape MyOneShape : this.unregisteredShapes) {
                 shapesToReturn.add(MyOneShape);
             }
 
-            for(OneShape MyOneShape : shapesToReturn){
+            for (OneShape MyOneShape : shapesToReturn) {
                 unregisteredShapes.remove(MyOneShape);
                 registeredShapes.add(MyOneShape);
             }
         }
+         */
+        /*
+        for (OneShape MyOneShape : this.registeredShapes) {
+            if (MyOneShape instanceof GroupedShape) {
+                GroupToUndo = (GroupedShape) MyOneShape;
+            }
+        }
 
-
+        if (GroupToUndo != null) {
+            for (OneShape shape : GroupToUndo.MyShapes) {
+                shape.isSelected = false;
+                this.registeredShapes.remove(GroupToUndo);
+                this.unregisteredShapes.add(GroupToUndo);
+            }
+        }
+         */
         paintCanvasBase.drawAllShapes();
-
-
-        //If statement for button being pressed then...
-        /*if(registeredRect.size() > 0){
-            Rectangle removedRectangle = this.registeredRect.remove(this.registeredRect.size() - 1);
-            this.unregisteredRect.add(removedRectangle);
-            //System.out.println("Size of registeredRect is: " + .registeredRect.size());
-        }*/
-
-        //System.out.println("Size of registeredRect is: " + this.registeredRect.size());
-
-        //Rectangle removedRectangle = this.registeredRect.remove(this.registeredRect.size() - 1);
-        //this.unregisteredRect.add(removedRectangle);
     }
 
     public void myRedo() {
         //Rectangle reintroduedRectangle = this.unregisteredRect.remove(this.unregisteredRect.size() - 1);
         //this.registeredRect.add(reintroduedRectangle);
-        if (this.myAppState.getActiveMouseMode().name().equals("DRAW")) {
+        if (this.myAppState.getActiveMouseMode().name().equals("DRAW") || this.myAppState.getActiveMouseMode().name().equals("SELECT")) {
             if (this.unregisteredShapes.size() == 0) {
                 System.out.println("Unregistered Shapes is empty");
             } else {
@@ -103,7 +107,7 @@ public class undoRedo {
                 this.registeredShapes.add(reinsertedShape);
                 System.out.println("Exiled rectangles " + this.unregisteredShapes.size());
                 System.out.println("Redeemed rectangles " + this.registeredShapes.size());
-                reinsertedShape.draw(paintCanvasBase.getGraphics2D());
+                reinsertedShape.draw(paintCanvasBase.getGraphics2D(), registeredShapes);
             }
         } else if (this.myAppState.getActiveMouseMode().name().equals("MOVE")) {
             if (this.unregisteredMoves.size() == 0) {
@@ -129,10 +133,11 @@ public class undoRedo {
 
             paintCanvasBase.drawAllShapes();
         }
-
+        /*
         else if(this.myAppState.getActiveMouseMode().name().equals("SELECT")){
             System.out.println("Entering the method here ");
             ArrayList<OneShape> shapesToDelete = new ArrayList<OneShape>();
+            //GroupedShape GroupToRedo = null;
             for(OneShape MyOneShape : this.registeredShapes){
                 if(MyOneShape.isSelected == true){
                     shapesToDelete.add(MyOneShape);
@@ -142,7 +147,22 @@ public class undoRedo {
                 registeredShapes.remove(MyOneShape);
                 unregisteredShapes.add(MyOneShape);
             }
-            paintCanvasBase.drawAllShapes();
         }
+        for(OneShape MyOneShape : this.unregisteredShapes){
+            if(MyOneShape instanceof GroupedShape){
+                GroupToUndo = (GroupedShape) MyOneShape;
+            }
+        }
+        if(GroupToUndo != null){
+            for(OneShape shape : GroupToUndo.MyShapes){
+                shape.isSelected = false;
+                this.registeredShapes.add(shape);
+            }
+            this.unregisteredShapes.remove(GroupToUndo);
+            this.registeredShapes.add(GroupToUndo);
+
+        }
+         */
+        paintCanvasBase.drawAllShapes();
     }
 }

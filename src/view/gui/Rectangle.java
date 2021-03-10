@@ -9,6 +9,7 @@ import view.interfaces.OneShape;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Rectangle extends OneShape implements IShape {
 
@@ -33,15 +34,16 @@ public class Rectangle extends OneShape implements IShape {
 
     }*/
     //@Override
-    public void draw(Graphics2D graphics2d){
+    public void draw(Graphics2D graphics2d, ArrayList<OneShape> registeredShapes){
         //this.width = this.getMyWidth();
         //this.height = this.getMyHeight();
         //System.out.println("We drew a Rectangle");
+        boolean _amIPartOfAGroup = this.CheckIfIAmPartOfAGroup(registeredShapes);
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)) {
             //SUPPOSED TO SET THIS TO SECONDARY COLOR
             if(this.isSelected == true){
-                SelectionRectangleDecorator selectionRectangleDecorator = new SelectionRectangleDecorator(this);
-                selectionRectangleDecorator.draw(graphics2d);
+                SelectionRectangleDecorator selectionRectangleDecorator = new SelectionRectangleDecorator(this, _amIPartOfAGroup);
+                selectionRectangleDecorator.draw(graphics2d, registeredShapes);
             }
             else{
                 graphics2d.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
@@ -52,8 +54,8 @@ public class Rectangle extends OneShape implements IShape {
 
         else if(this.myActiveShade.equals(myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                SelectionRectangleDecorator selectionRectangleDecorator = new SelectionRectangleDecorator(this);
-                selectionRectangleDecorator.draw(graphics2d);
+                SelectionRectangleDecorator selectionRectangleDecorator = new SelectionRectangleDecorator(this, _amIPartOfAGroup);
+                selectionRectangleDecorator.draw(graphics2d, registeredShapes);
             }
             else{
                 graphics2d.setColor(myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
@@ -64,8 +66,8 @@ public class Rectangle extends OneShape implements IShape {
 
         else{
             if(this.isSelected == true){
-                SelectionRectangleDecorator selectionRectangleDecorator = new SelectionRectangleDecorator(this);
-                selectionRectangleDecorator.draw(graphics2d);
+                SelectionRectangleDecorator selectionRectangleDecorator = new SelectionRectangleDecorator(this, _amIPartOfAGroup);
+                selectionRectangleDecorator.draw(graphics2d, registeredShapes);
 
             }
             else{

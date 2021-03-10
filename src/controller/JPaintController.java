@@ -90,7 +90,8 @@ public class JPaintController implements IJPaintController {
         IEventCallback callback4 = new IEventCallback() {
             @Override
             public void run() {
-
+                CopyShape copyShape = paintCanvas.MyCopyShape;
+                paintCanvas.MyCopyShape.DeleteMe();
             }
         };
 

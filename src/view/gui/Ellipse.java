@@ -9,6 +9,7 @@ import view.interfaces.OneShape;
 import view.interfaces.IShape;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Ellipse extends OneShape implements IShape {
     public ApplicationState myAppState;
@@ -49,12 +50,13 @@ public class Ellipse extends OneShape implements IShape {
         this.height = endHeight;
     }
 
-    public void draw(Graphics2D graphics2D){
+    public void draw(Graphics2D graphics2D, ArrayList<OneShape> registeredShapes){
         //System.out.println("We drew an Ellipse!");
+        boolean _amIPartOfAGroup = this.CheckIfIAmPartOfAGroup(registeredShapes);
         if(this.myActiveShade.equals(this.myActiveShade.OUTLINE)){
             if(this.isSelected == true){
-                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this);
-                selectionEllipseDecorator.draw(graphics2D);
+                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this, _amIPartOfAGroup);
+                selectionEllipseDecorator.draw(graphics2D, registeredShapes);
             }
             else{
                 graphics2D.setColor(this.myShapeColorMap.getMyPrimaryShapeColor(this.myColor));
@@ -65,8 +67,8 @@ public class Ellipse extends OneShape implements IShape {
 
         else if(this.myActiveShade.equals(this.myActiveShade.OUTLINE_AND_FILLED_IN)){
             if(this.isSelected == true){
-                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this);
-                selectionEllipseDecorator.draw(graphics2D);
+                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this, _amIPartOfAGroup);
+                selectionEllipseDecorator.draw(graphics2D, registeredShapes);
             }
             else{
                 graphics2D.setColor(this.myShapeColorMap.getMySecondaryShapeColor(this.mySecondaryColor));
@@ -77,8 +79,8 @@ public class Ellipse extends OneShape implements IShape {
 
         else{
             if(this.isSelected == true){
-                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this);
-                selectionEllipseDecorator.draw(graphics2D);
+                SelectionEllipseDecorator selectionEllipseDecorator = new SelectionEllipseDecorator(this, _amIPartOfAGroup);
+                selectionEllipseDecorator.draw(graphics2D, registeredShapes);
             }
             else{
                 graphics2D.setColor(myShapeColorMap.getMyPrimaryShapeColor(this.myColor));

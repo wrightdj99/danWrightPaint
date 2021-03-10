@@ -33,7 +33,7 @@ public abstract class PaintCanvasBase extends JComponent {
             if (this.myAppState.getActiveMouseMode().name().equals("DRAW")){
                 shape.isSelected = false;
             }
-            shape.draw(graphics2D);
+            shape.draw(graphics2D, this.myUndoRedo.registeredShapes);
         }
 
     }
