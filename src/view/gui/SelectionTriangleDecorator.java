@@ -14,6 +14,9 @@ public class SelectionTriangleDecorator extends SelectionDecorator{
     public void draw(Graphics2D graphics2D, ArrayList<OneShape> registeredShapes){
         //decoratedShape.draw(graphics2D);
         if (!this.AmIPartOfAGroup) {
+            if(this.height < 0 || this.height < 0){
+                System.out.println("Uh oh!");
+            }
             Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
             graphics2D.setStroke(stroke);
             graphics2D.setColor(Color.BLACK);
