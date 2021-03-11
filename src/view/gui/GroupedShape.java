@@ -72,6 +72,7 @@ public class GroupedShape extends OneShape implements IShape {
         //Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
         //graphics2D.setStroke(stroke);
         boolean _amIPartOfAGroup = this.CheckIfIAmPartOfAGroup(registeredShapes);
+
         if (this.isSelected == true){
             SelectionGroupedShapeDecorator selectionGroupedShapeDecorator = new SelectionGroupedShapeDecorator(this, _amIPartOfAGroup);
             selectionGroupedShapeDecorator.draw(graphics2D, registeredShapes);

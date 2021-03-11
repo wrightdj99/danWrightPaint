@@ -93,10 +93,11 @@ public class Triangle extends OneShape implements IShape {
         int endWidth = this.endPoint.x - this.startPoint.x;
         if (endWidth < 0){
             endWidth = -1 * endWidth;
-            this.endPoint.x = this.startPoint.x - endWidth;
-            //this.startPoint.x = this.startPoint.x - endWidth;
-            //this.endPoint.x = this.endPoint.x - endWidth;
-            //this.startPoint.x = this.startPoint.x - endWidth;
+            paintPoint swapPoint = new paintPoint();
+            swapPoint.x = this.startPoint.x;
+            swapPoint.y = this.startPoint.y;
+            this.startPoint = endPoint;
+            this.endPoint = swapPoint;
         }
         this.width = endWidth;
     }
@@ -105,9 +106,12 @@ public class Triangle extends OneShape implements IShape {
         int endHeight = this.endPoint.y - this.startPoint.y;
         if (endHeight < 0){
             endHeight = -1 * endHeight;
-            this.endPoint.y = this.startPoint.y - endHeight;
+            paintPoint swapPoint = new paintPoint();
+            swapPoint.x = this.startPoint.x;
+            swapPoint.y = this.startPoint.y;
+            this.startPoint = endPoint;
+            this.endPoint = swapPoint;
             //this.startPoint.y = this.startPoint.y - endHeight;
-            //this.endPoint.y = this.endPoint.y - endHeight;
         }
         this.height = endHeight;
     }
