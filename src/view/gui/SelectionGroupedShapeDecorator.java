@@ -20,6 +20,6 @@ public class SelectionGroupedShapeDecorator extends SelectionDecorator{
     }
 
     private void SelectionSpecifier(){
-        System.out.println("You're selecting a Rectangle");
+        System.out.println("You're selecting a grouped shape");
     }
 }
